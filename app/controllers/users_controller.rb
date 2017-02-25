@@ -13,10 +13,6 @@ class UsersController < ApplicationController
   def show
   end
 
-  def cust_page
-    
-  end
-
   # GET /users/new
   def new
     @user = User.new

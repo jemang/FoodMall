@@ -2,13 +2,12 @@
 
 	<% if current_user %>
 		
-		<h3>testing</h3>
-		<%= render 'service', user: @user %>
-		<%= link_to 'Back', users_path %>
+		<%= render 'service', user: @user %></br>
+		<%= link_to 'Back', users_path, class: "hollow button secondary" %>
 
 	<% else %>
 
-		<%= render 'form', user: @user %>
-		<%= link_to 'Back', users_path %>
+		<%= render 'form', user: @user %></br>
+		<%= link_to 'Back', '/login', class: "hollow button secondary" %>
 
 	<% end %>

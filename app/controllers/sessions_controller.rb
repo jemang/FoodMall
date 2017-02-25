@@ -10,8 +10,10 @@ class SessionsController < ApplicationController
 			session[:user_id] = user.id
 			if user.role.eql?("admin")
 				redirect_to '/'
+			elsif user.role.eql?("customer")
+				redirect_to '/customer'
 			else
-				redirect_to 'blank'
+				redirect_to '/login'
 			end
 		else
 			redirect_to '/login'
