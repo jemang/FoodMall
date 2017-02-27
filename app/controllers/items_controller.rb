@@ -10,6 +10,8 @@ class ItemsController < ApplicationController
 
   def customer
     @items = Item.all
+    @orderitems = Orderitem.all
+    @ww = Orderitem.pluck(:user_id)
   end
 
   # GET /items/1

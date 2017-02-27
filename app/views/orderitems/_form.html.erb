@@ -1,0 +1,53 @@
+<%= form_for(orderitem) do |f| %>
+  <% if orderitem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(orderitem.errors.count, "error") %> prohibited this orderitem from being saved:</h2>
+
+      <ul>
+      <% orderitem.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :product %>
+    <%= f.text_field :product, value: @item.name, readonly: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price, value: @item.price, readonly: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= f.label :note %>
+    <%= f.text_area :note %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :total %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :status, value: "pre-order" %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :item_id, value: @item.id %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
