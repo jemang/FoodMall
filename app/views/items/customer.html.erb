@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Our Product</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td>RM : <%= item.price %></td>
+        <td><%= item.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Order product', '/customer', class: "hollow button" %>

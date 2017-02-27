@@ -9,6 +9,34 @@
   </head>
 
   <body>
-    <%= yield %>
+
+  	<nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to 'Welcome', '' %></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <% if current_user %>
+            <li><%= link_to current_user.username, user_path(current_user.id) %></b></li>
+            <li class="divider"></li>
+            <li><%= link_to "Logout", '/logout' %></li>
+          <% else %>
+            <li><%= link_to 'Login', '/login' %></li>
+            <li class"divider"></li>
+            <li><%= link_to 'Signup', '/signup' %></li>
+          <% end %>
+        </ul>
+      </section>
+    </nav>
+
+    
+    <br><br>
+    <div class="row">
+      <div class="columns"><%= yield %></div>
+    </div>
+    
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
