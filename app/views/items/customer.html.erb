@@ -24,51 +24,6 @@
   </tbody>
 </table>
 
-<br>
+<br>   
 
-
-
-
-    
-
-<h1>Selected Product</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Product Name</th>
-      <th>Quantity</th>
-      <th>Note</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th>Item</th>
-      <th>User</th>
-      <th>Action</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orderitems.each do |orderitem| %>
-    <% if current_user == orderitem.user %>
-      <% if orderitem.status.eql?("pre-order") %>
-      <tr>
-        <td><%= orderitem.item.name %></td>
-        <td><%= orderitem.quantity %></td>
-        <td><%= orderitem.note %></td>
-        <td><%= orderitem.total %></td>
-        <td><%= orderitem.status %></td>
-        <td><%= orderitem.user.username %></td>
-        <td><%= link_to 'Edit', edit_orderitem_path(orderitem) %></td>
-        <td><%= link_to 'Cancel', orderitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      
-    <% end %>
-<% else %>
-  <h1>nothing</h1>
-<% end %>
-    <% end %>
-
-  </tbody>
-</table>
-  
+<%= render "SelectedProduct" %>
