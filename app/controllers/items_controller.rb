@@ -8,12 +8,6 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  def customer
-    @items = Item.all
-    @orderitems = Orderitem.all
-    @ww = Orderitem.pluck(:user_id)
-  end
-
   # GET /items/1
   # GET /items/1.json
   def show

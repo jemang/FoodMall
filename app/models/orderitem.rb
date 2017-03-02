@@ -5,6 +5,8 @@ class Orderitem < ApplicationRecord
 
     before_save :finalize
 
+    #validates :quantity, :dtime, :presence => true
+
    
 
 private

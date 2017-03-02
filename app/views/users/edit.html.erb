@@ -3,12 +3,5 @@
 <%= render 'cedit', user: @user %>
 
 </br>
-<%= link_to 'Show', @user, class: "hollow button" %> |
 
-<%	if current_user.role.eql?("admin") %>
-	<%= link_to 'Back', users_path, class: "hollow button secondary" %>
-<%	elsif current_user.role.eql?("customer") %>
-	<%= link_to 'Back', '/customer', class: "hollow button secondary" %>
-<% else %>
-
-<% end %>
+<%= link_to 'Back', users_path, class: "hollow button secondary" %>

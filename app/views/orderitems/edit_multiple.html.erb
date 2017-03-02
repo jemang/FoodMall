@@ -1,0 +1,25 @@
+<h1>Your Items</h1>
+
+<%= form_for :orderitem, :url => '/update_multiple', :html => { :method => :put } do |f| %>
+
+	<ul>
+		<% for orderitem in @orderitems %>
+		<li>
+			<%= hidden_field_tag "orderitem_ids[]", orderitem.id %>
+			<%= orderitem.item.name %>
+		</li>
+		<% end %>
+	</ul>
+	<p>
+		<%= f.label :Total_Price %><br>
+		<%= f.text_field :totalprice, value: @sum, readonly: true %>
+	</p>
+	<p>
+		<%= f.label :Time_To_Delivery %><br>
+		<%= f.datetime_field(:dtime, min: Date.today, max: Date.today.next) %>
+	</p>
+	<p>
+		<%= f.hidden_field :status, value: "ordered" %>
+	</p>
+	<p><%= f.submit "Make Order" %> | <%= link_to 'Back', '/customer' %></p>
+<% end %>

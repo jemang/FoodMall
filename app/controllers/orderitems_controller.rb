@@ -30,7 +30,7 @@ class OrderitemsController < ApplicationController
 
     respond_to do |format|
       if @orderitem.save
-        format.html { redirect_to @orderitem, notice: 'Orderitem was successfully created.' }
+        format.html { redirect_to '/customer', notice: 'Orderitem was successfully created.' }
         format.json { render :show, status: :created, location: @orderitem }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class OrderitemsController < ApplicationController
   def update
     respond_to do |format|
       if @orderitem.update(orderitem_params)
-        format.html { redirect_to @orderitem, notice: 'Orderitem was successfully updated.' }
+        format.html { redirect_to '/customer', notice: 'Orderitem was successfully updated.' }
         format.json { render :show, status: :ok, location: @orderitem }
       else
         format.html { render :edit }
@@ -63,6 +63,24 @@ class OrderitemsController < ApplicationController
     end
   end
 
+  def edit_multiple
+    @orderitems = Orderitem.find(params[:orderitem_ids])
+    @sum = 0
+    @orderitems.each do |orderitem|
+      @sum = orderitem.total.to_i + @sum
+    end
+    
+  end
+
+  def update_multiple
+    @orderitems = Orderitem.find(params[:orderitem_ids])
+    @orderitems.each do |orderitem|
+      orderitem.update(multi_params)
+    end
+    flash[:notice] = "Order Send!!"
+    redirect_to '/customer'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orderitem
@@ -72,6 +90,10 @@ class OrderitemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def orderitem_params
       params.require(:orderitem).permit(:quantity, :note, :total, :status, :item_id, :user_id)
+    end
+
+    def multi_params
+      params.require(:orderitem).permit(:status, :dtime, :totalprice)
     end
 
 end

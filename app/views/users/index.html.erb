@@ -1,121 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'New Worker', new_user_path, class: "button success" %> |
-<%= link_to 'View Product', items_path, class: "button success" %> |
-<%= link_to 'View Order', '', class: "button success" %>
-
-<h1>Customers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Fullname</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Address</th>
-      <th>Password</th>
-      <th>Phone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "customer" %>
-      <tr>
-        <td><%= user.fullname %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.role %></td>
-        <td><%= user.address %></td>
-        <td><%= user.password %></td>
-        <td><%= user.phone %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<h1>Chef</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Fullname</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Address</th>
-      <th>Password</th>
-      <th>Phone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "chef" %>
-      <tr>
-        <td><%= user.fullname %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.role %></td>
-        <td><%= user.address %></td>
-        <td><%= user.password %></td>
-        <td><%= user.phone %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<h1>Runner</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Fullname</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Address</th>
-      <th>Password</th>
-      <th>Phone</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "runner" %>
-      <tr>
-        <td><%= user.fullname %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.role %></td>
-        <td><%= user.address %></td>
-        <td><%= user.password %></td>
-        <td><%= user.phone %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-
+<% if current_user.role.eql?('admin') %>
+  <% controller.redirect_to '/admin' %>
+  <% elsif current_user.role.eql?('customer') %>
+    <% controller.redirect_to '/customer' %>
+  <% elsif current_user.role.eql?('runner') %>
+    <% controller.redirect_to '/runner' %>
+  <% elsif current_user.role.eql?('chef') %>
+    <% controller.redirect_to '/chef' %>
+  <% else %>
+    <h3>You are not member yet</h3>
+    <p><% link_to "Click to register", '/signup' %></p>
+<% end %>
+            

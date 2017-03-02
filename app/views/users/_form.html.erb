@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">
@@ -37,12 +37,12 @@
 
   <div class="field">
     <%= f.label :password %>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </div>
 
   <div class="field">
-    Password Confirmation<br>
-    <th> <%= f.password_field :password_confirmation %></th>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </div>
 
   <div class="field">

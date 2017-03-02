@@ -1,4 +1,4 @@
-<h1>cedit</h1>
+
 <%= form_for(user) do |f| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
@@ -36,11 +36,21 @@
     <%= f.label :password %>
     <%= f.text_field :password %>
   </div>
-
-  <div class="field">
-    Password Confirmation<br>
-    <th> <%= f.password_field :password_confirmation %></th>
-  </div>
+  
+  <% if current_user.role.eql?('admin') %>
+    <div class="field">
+      <%= f.label :role %>
+      <%= f.select :role, [['runner'], ['chef'],['customer'],['admin']], selected: f.object.role %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :password_confirmation, value: user.password %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :phone %>

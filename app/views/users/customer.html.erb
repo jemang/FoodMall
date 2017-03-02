@@ -24,6 +24,8 @@
   </tbody>
 </table>
 
-<br>   
-
-<%= render "SelectedProduct" %>
+<br>
+   
+<% if @stat == "true" %>
+    <%= render "items/SelectedProduct" %>
+<% end %>

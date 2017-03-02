@@ -13,6 +13,28 @@ class UsersController < ApplicationController
   def show
   end
 
+  def admin
+    @users = User.all
+  end
+
+  def customer
+    @items = Item.all
+    @orderitems = Orderitem.all
+    @orderitems.each do |orderitem|
+      if current_user == orderitem.user && orderitem.status == 'pre-order'
+        @stat = "true"
+      end
+    end
+  end
+
+  def runner
+    
+  end
+
+  def chef
+    
+  end
+
   # GET /users/new
   def new
     @user = User.new

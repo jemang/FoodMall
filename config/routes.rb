@@ -11,8 +11,13 @@ Rails.application.routes.draw do
   get 'pages/home'
 
   get '/signup' => 'users#new'
+  get '/customer' => 'users#customer'
+  get '/admin' => 'users#admin'
+  get '/runner' => 'users#runner'
+  get '/chef' => 'users#chef'
 
-  get '/customer' => 'items#customer'
+  post '/edit_multiple' => 'orderitems#edit_multiple'
+  put '/update_multiple' => 'orderitems#update_multiple'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
