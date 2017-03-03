@@ -1,1 +1,35 @@
-<h1>hai runner</h1>
+<p id="notice"><%= notice %></p>
+
+<h1>Order to Delivery</h1>
+
+<%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Customer Name</th>
+      <th>Quantity</th>
+      <th>Delivery Time</th>
+      <th>Items</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orderitems.each do |order| %>
+      <% if order.status.eql?('ready') %> 
+      <tr>
+      	<td><%= check_box_tag "orderitem_ids[]", order.id %></td>
+        <td><%= link_to order.user.username, user_path(order.user, dd: 'detail') %></td>
+        <td><%= order.quantity %></td>
+        <td><%= order.dtime %></td>
+        <td><%= order.item.name %></td>
+        <td><%= order.status %></td>
+        <td><%= order.runner_id %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%= f.submit "Add to Task" %> | <%= link_to 'My Task', '/my_task' %>
+<% end %>

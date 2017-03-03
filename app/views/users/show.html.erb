@@ -1,46 +1,60 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Fullname:</strong>
-  <%= @user.fullname %>
-</p>
+<% if @match.eql?('detail') %>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+  <p>
+    <strong>Fullname:</strong>
+    <%= @user.fullname %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @user.role %>
-</p>
+  <p>
+    <strong>Address:</strong>
+    <%= @user.address %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @user.phone %>
-</p>
+  </br>
+  <%= link_to 'Back', '/', class: "hollow button secondary" %>
 
-<p>
-  <strong>Address:</strong>
-  <%= @user.address %>
-</p>
-
-</br>
-<%= link_to 'Edit', edit_user_path(@user, yy: 'sayur'), class: "hollow button" %> |
-<%= link_to 'Change Password', edit_user_path(@user, yy: 'change'), class: "hollow button" %> |
-<%  if current_user.role.eql?("admin") %>
-  <%= link_to 'Back', '/admin', class: "hollow button secondary" %>
-<%  elsif current_user.role.eql?("customer") %>
-  <%= link_to 'Back', '/customer', class: "hollow button secondary" %>
-<%  elsif current_user.role.eql?("runner") %>
-  <%= link_to 'Back', '/runner', class: "hollow button secondary" %>
-<%  elsif current_user.role.eql?("chef") %>
-  <%= link_to 'Back', '/chef', class: "hollow button secondary" %>
 <% else %>
+  
+  <p>
+    <strong>Fullname:</strong>
+    <%= @user.fullname %>
+  </p>
+
+  <p>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Role:</strong>
+    <%= @user.role %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @user.address %>
+  </p>
+
+  </br>
+  <%= link_to 'Edit', edit_user_path(@user, yy: 'sayur'), class: "hollow button" %> |
+  <%= link_to 'Change Password', edit_user_path(@user, yy: 'change'), class: "hollow button" %> |
+  <%= link_to 'Back', '/', class: "hollow button secondary" %>
 
 <% end %>

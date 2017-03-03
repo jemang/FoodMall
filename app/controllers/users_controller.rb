@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-
+    @match = params[:dd]
   end
 
   def admin
@@ -29,11 +29,14 @@ class UsersController < ApplicationController
   end
 
   def runner
-    
+    @items = Item.all
+    @orderitems = Orderitem.all
+    @group = @orderitems.group_by { |t| t.totalprice }
   end
 
   def chef
-    
+    @items = Item.all
+    @orderitems = Orderitem.all
   end
 
   # GET /users/new

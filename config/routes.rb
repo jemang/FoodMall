@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   post '/edit_multiple' => 'orderitems#edit_multiple'
   put '/update_multiple' => 'orderitems#update_multiple'
+
+  put '/update_stask' => 'items#update_stask'
+  get '/my_task' => 'items#my_task'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

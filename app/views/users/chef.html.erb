@@ -1,1 +1,34 @@
-<h1>hai chef</h1>
+<p id="notice"><%= notice %></p>
+
+<h1>Order Request</h1>
+
+<%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Items</th>
+      <th>Quantity</th>
+      <th>Delivery Time</th>
+      <th>Note</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orderitems.each do |order| %>
+      <% if order.status.eql?('ordered') %> 
+      <tr>
+      	<td><%= check_box_tag "orderitem_ids[]", order.id %></td>
+        <td><%= order.item.name %></td>
+        <td><%= order.quantity %></td>
+        <td><%= order.dtime %></td>
+        <td><%= order.note %></td>
+        <td><%= order.status %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%= f.submit "Add to Task" %> | <%= link_to 'My Task', '/my_task' %>
+<% end %>

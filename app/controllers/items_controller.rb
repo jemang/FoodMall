@@ -62,6 +62,30 @@ class ItemsController < ApplicationController
     end
   end
 
+  def my_task
+    @items = Item.all
+    @orderitems = Orderitem.all
+  end
+
+  def update_stask
+    @orderitems = Orderitem.find(params[:orderitem_ids])
+    @orderitems.each do |orderitem|
+      if orderitem.status.eql?('ordered')
+          orderitem.update_attribute(:status, 'processing')
+          orderitem.update_attribute(:chef_id, current_user.id)
+      elsif orderitem.status.eql?('processing')
+          orderitem.update_attribute(:status, 'ready')
+      elsif orderitem.status.eql?('ready')
+          orderitem.update_attribute(:status, 'delivering')
+          orderitem.update_attribute(:runner_id, current_user.id)
+      elsif orderitem.status.eql?('delivering')
+          orderitem.update_attribute(:status, 'complete')
+      end
+    end
+    flash[:notice] = "Success!!"
+    redirect_to '/'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

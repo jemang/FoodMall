@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+<h1>My Task</h1>
+
+<!-- chef page  -->
+
+<% if current_user.role.eql?('chef') %>
+
+  <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
+  <table>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Items</th>
+        <th>Quantity</th>
+        <th>Delivery Time</th>
+        <th>Note</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orderitems.each do |order| %>
+        <% if current_user.id == order.chef_id && order.status.eql?('processing') %>  
+        <tr>
+      	  <td><%= check_box_tag "orderitem_ids[]", order.id %></td>
+          <td><%= order.item.name %></td>
+          <td><%= order.quantity %></td>
+          <td><%= order.dtime %></td>
+          <td><%= order.note %></td>
+          <td><%= order.status %></td>
+          <td><%= link_to 'Cancel' %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= f.submit "Complete" %> | <%= link_to 'Back', '/' %>
+  <% end %>
+<% end %>
+
+
+<!-- runner page  -->
+
+
+<% if current_user.role.eql?('runner') %>
+
+  <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
+  <table>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Items</th>
+        <th>Quantity</th>
+        <th>Delivery Time</th>
+        <th>Note</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orderitems.each do |order| %>
+        <% if current_user.id == order.runner_id && order.status.eql?('delivering') %>  
+        <tr>
+      	  <td><%= check_box_tag "orderitem_ids[]", order.id %></td>
+       	  <td><%= link_to order.user.username, user_path(order.user, dd: 'detail') %></td>
+          <td><%= order.quantity %></td>
+          <td><%= order.dtime %></td>
+          <td><%= order.item.name %></td>
+          <td><%= order.status %></td>
+          <td><%= link_to 'Cancel' %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= f.submit "Complete" %> | <%= link_to 'Back', '/' %>
+  <% end %>
+<% end %>
