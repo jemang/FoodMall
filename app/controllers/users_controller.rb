@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+
   end
 
   def admin
@@ -42,6 +43,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @match = params[:yy]
   end
 
   # POST /users

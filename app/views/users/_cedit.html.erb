@@ -26,35 +26,22 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_area :address, :size => "35x8" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.text_field :password %>
-  </div>
   
   <% if current_user.role.eql?('admin') %>
     <div class="field">
       <%= f.label :role %>
       <%= f.select :role, [['runner'], ['chef'],['customer'],['admin']], selected: f.object.role %>
     </div>
-    <div class="field">
-      <%= f.hidden_field :password_confirmation, value: user.password %>
-    </div>
-  <% else %>
-    <div class="field">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
   <% end %>
 
   <div class="field">
     <%= f.label :phone %>
     <%= f.number_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_area :address, :size => "35x8" %>
   </div>
 
   <div class="actions">
