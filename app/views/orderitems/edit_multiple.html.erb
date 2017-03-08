@@ -1,7 +1,6 @@
-<h1>Your Items</h1>
+<h2>Your Items</h2><br>
 
-<%= form_for :orderitem, :url => '/update_multiple', :html => { :method => :put } do |f| %>
-
+<%= simple_form_for :orderitem, :url => '/update_multiple', html: { :method => :put } do |f| %>
 	<ul>
 		<% for orderitem in @orderitems %>
 		<li>
@@ -10,16 +9,11 @@
 		</li>
 		<% end %>
 	</ul>
-	<p>
-		<%= f.label :Total_Price %><br>
-		<%= f.text_field :totalprice, value: @sum, readonly: true %>
-	</p>
-	<p>
-		<%= f.label :Time_To_Delivery %><br>
-		<%= f.datetime_field(:dtime, min: Date.today, max: Date.today.next) %>
-	</p>
-	<p>
-		<%= f.hidden_field :status, value: "ordered" %>
-	</p>
-	<p><%= f.submit "Make Order" %> | <%= link_to 'Back', '/customer' %></p>
+	<br>
+
+  <%= f.error_notification %>
+  <%= f.input :totalprice, label: "Total Price", disabled: true, :input_html => { :value => @sum } %>
+  <%= f.input :dtime, label: "Delivery Time", as: :time %>
+  <%= f.input :status, as: :hidden, :input_html => {:value => "ordered"} %>
+  <p align="right"><%= f.button :submit, "Make Order", class: "btn btn-success" %> | <%= link_to 'Back', '/customer', class: 'btn btn-warning' %></p>
 <% end %>

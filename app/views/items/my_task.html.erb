@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
-<h1>My Task</h1>
+<h2>My Task</h2><br>
 
 <!-- chef page  -->
 
 <% if current_user.role.eql?('chef') %>
 
   <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
-  <table>
+  <table class="table">
     <thead>
-      <tr>
+      <tr class="info">
         <th> </th>
         <th>Items</th>
         <th>Quantity</th>
@@ -35,7 +35,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= f.submit "Complete" %> | <%= link_to 'Back', '/' %>
+  <br>
+  <p align="right"><%= f.submit "Complete", class: 'btn btn-primary' %> | <%= link_to 'Back', '/', class: 'btn btn-warning' %></p>
   <% end %>
 <% end %>
 
@@ -46,9 +47,9 @@
 <% if current_user.role.eql?('runner') %>
 
   <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
-  <table>
+  <table class="table">
     <thead>
-      <tr>
+      <tr class="success">
         <th> </th>
         <th>Items</th>
         <th>Quantity</th>
@@ -75,6 +76,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= f.submit "Complete" %> | <%= link_to 'Back', '/' %>
+  <br>
+  <p align="right"><%= f.submit "Complete", class: 'btn btn-primary' %> | <%= link_to 'Back', '/', class: 'btn btn-warning' %></p>
   <% end %>
 <% end %>

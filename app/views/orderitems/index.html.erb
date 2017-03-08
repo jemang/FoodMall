@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>All Order Items</h1>
+<h2>All Order Items</h2><br>
 
-<table>
+<table class="table">
   <thead>
-    <tr>
+    <tr class="info">
       <th>Quantity</th>
       <th>Note</th>
       <th>Total</th>
@@ -24,9 +24,9 @@
         <td><%= orderitem.status %></td>
         <td><%= orderitem.item %></td>
         <td><%= orderitem.user %></td>
-        <td><%= link_to 'Show', orderitem %></td>
-        <td><%= link_to 'Edit', edit_orderitem_path(orderitem) %></td>
-        <td><%= link_to 'Destroy', orderitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
+        <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
+        <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'Back', '/', class: "hollow button secondary" %>
+<p align="right"><%= link_to 'Back', '/', class: "btn btn-warning" %></p>

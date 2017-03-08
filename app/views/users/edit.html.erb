@@ -1,11 +1,8 @@
-<h1>Editing User</h1>
+<h2>Editing User</h2><br>
 
-<% if @match.eql?('sayur') %>
+<% if @match.eql?('edit') %>
 	<%= render 'cedit', user: @user %>
 <% end %>
 <% if @match.eql?('change') %>
 	<%= render 'change_password', user: @user %>
 <% end %>
-</br>
-
-<%= link_to 'Back', users_path, class: "hollow button secondary" %>

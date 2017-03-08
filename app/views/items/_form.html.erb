@@ -1,33 +1,12 @@
-<%= form_for(item) do |f| %>
-  <% if item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-      <ul>
-      <% item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-
-  <div class="field">
-    <%= f.label :note %>
-    <%= f.text_area :note %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for item, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :price %>
+  <%= f.input :note %>
+  <p align="right"><%= f.button :submit, "Create Item", class: "btn btn-success" %> | | <%= link_to 'Back', '/items', class: "btn btn-warning" %></p>
 <% end %>
+
+
+
 

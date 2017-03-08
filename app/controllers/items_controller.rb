@@ -80,7 +80,7 @@ class ItemsController < ApplicationController
           orderitem.update_attribute(:runner_id, current_user.id)
       elsif orderitem.status.eql?('delivering')
           orderitem.update_attribute(:status, 'complete')
-      end
+      end 
     end
     flash[:notice] = "Success!!"
     redirect_to '/'

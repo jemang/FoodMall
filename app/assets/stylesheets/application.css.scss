@@ -1,0 +1,35 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+
+
+
+body {
+	padding-top:65px;
+}
+
+.navbar-fixed-top {
+	position: fixed;
+	background-color: #333;
+}
+
+.content {
+	background-color: #eee;
+}
+
+.table {
+	border-radius: 5px;
+	width: 90%;
+	margin: 0px auto;
+	float: none;
+}
+
+#sidebar {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  padding-left: 0px;
+  padding-right: 0px;
+  transition: all 0.5s ease;
+}

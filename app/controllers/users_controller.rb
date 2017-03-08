@@ -19,7 +19,9 @@ class UsersController < ApplicationController
   end
 
   def customer
-    @items = Item.all
+    @search = Item.ransack(params[:q])
+    @search.sorts = 'name asc' if @search.sorts.empty?
+    @items = @search.result(distinct: true)
     @orderitems = Orderitem.all
     @orderitems.each do |orderitem|
       if current_user == orderitem.user && orderitem.status == 'pre-order'

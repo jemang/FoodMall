@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Order Request</h1>
+<h2>Order Request</h2><br>
 
 <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
-<table>
+<table class="table">
   <thead>
-    <tr>
+    <tr class="info">
       <th> </th>
       <th>Items</th>
       <th>Quantity</th>
@@ -30,5 +30,6 @@
     <% end %>
   </tbody>
 </table>
-<%= f.submit "Add to Task" %> | <%= link_to 'My Task', '/my_task' %>
+<br>
+<p align="right"><%= f.submit "Add to Task", class: 'btn btn-primary' %> | <%= link_to 'My Task', '/my_task', class: 'btn btn-info' %></p>
 <% end %>

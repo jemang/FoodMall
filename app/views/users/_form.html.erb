@@ -1,56 +1,14 @@
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<br>
+<%= simple_form_for user, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :fullname %>
+  <%= f.input :username %>
+  <%= f.input :email, placeholder: 'hint@example.com' %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :role, :as => :hidden, :input_html => { :value => "customer" } %>
+  <%= f.input :phone, as: :numeric %>
+  <%= f.input :address %>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :fullname %>
-    <%= f.text_field :fullname %>
-  </div>
-
-  <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.hidden_field :role, :value => "customer" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone %>
-    <%= f.number_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_area :address, :size => "35x8" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <p align="right"><%= f.button :submit, "register", class: "btn btn-success" %></p>
 <% end %>

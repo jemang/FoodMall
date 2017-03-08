@@ -18,7 +18,7 @@
   </p>
 
   </br>
-  <%= link_to 'Back', '/', class: "hollow button secondary" %>
+  <%= link_to 'Back', '/', class: "btn btn-warning" %>
 
 <% else %>
   
@@ -53,8 +53,7 @@
   </p>
 
   </br>
-  <%= link_to 'Edit', edit_user_path(@user, yy: 'sayur'), class: "hollow button" %> |
-  <%= link_to 'Change Password', edit_user_path(@user, yy: 'change'), class: "hollow button" %> |
-  <%= link_to 'Back', '/', class: "hollow button secondary" %>
+  <%= link_to 'Edit', edit_user_path(@user, yy: 'edit'), class: "btn btn-primary" %> |
+  <%= link_to 'Back', '/', class: "btn btn-warning" %>
 
 <% end %>

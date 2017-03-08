@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Our Product</h1>
-
-<table>
+<h2>Our Product</h2>
+<br>
+<table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
+    <tr class="info">
+      <th><%= sort_link @search, :name, "Name" %></th>
+      <th><%= sort_link @search, :price, "Price" %></th>
       <th>Note</th>
       <th>Action</th>
     </tr>
@@ -18,7 +18,7 @@
         <td><%= item.name %></td>
         <td>RM : <%= item.price %></td>
         <td><%= item.note %></td>
-        <td><%= link_to 'Order', new_orderitem_path(item_id: item.id) %></td>
+        <td><%= link_to 'Order', new_orderitem_path(item_id: item.id), class: "btn btn-success" %></td>
       </tr>
     <% end %>
   </tbody>
