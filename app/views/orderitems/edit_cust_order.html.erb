@@ -1,0 +1,23 @@
+<h2>Your Items</h2><br>
+
+<%= simple_form_for :orderitem, :url => '/update_cust_order', html: { :method => :put } do |f| %>
+	<ul>
+		<% for orderitem in @orderitems %>
+		<li>
+			<%= hidden_field_tag "orderitem_ids[]", orderitem.id %>
+			<%= orderitem.item.name %>
+			<% @stat = orderitem.status %>
+		</li>
+		<% end %>
+	</ul>
+	<br>
+
+  <%= f.error_notification %>
+  <% if @stat.eql?('ordered') || @stat.eql?('processing') %>
+  	<%= f.input :runner_id, label: "Runner", collection: User.where(:role => "runner").ids %>
+  	<%= f.input :chef_id, label: "Chef", collection: User.where(:role => "chef").ids %>
+  <% else %>
+  	<%= f.input :runner_id, label: "Runner", collection: User.where(:role => "runner").ids %>
+  <% end %>
+  <p align="right"><%= f.button :submit, "Make Order", class: "btn btn-success" %> | <%= link_to 'Back', :back, class: 'btn btn-warning' %></p>
+<% end %>

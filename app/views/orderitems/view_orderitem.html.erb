@@ -1,0 +1,62 @@
+<h2>All Order Items</h2><br>
+
+<table class="table">
+  <thead>
+    <tr class="info">
+      <th>Customer</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @users.each do |usr| %>
+      <% if usr.role.eql?('customer') %>
+      <tr>
+        <td><%= link_to usr.username, orderitems_path(:dd => usr.id) %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<table class="table">
+  <thead>
+    <tr class="info">
+      <th>Chef</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @users.each do |usr| %>
+      <% if usr.role.eql?('chef') %>
+      <tr>
+        <td><%= link_to usr.username, orderitems_path(:dd => usr.id) %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<table class="table">
+  <thead>
+    <tr class="info">
+      <th>Runner</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @users.each do |usr| %>
+      <% if usr.role.eql?('runner') %>
+      <tr>
+        <td><%= link_to usr.username, orderitems_path(:dd => usr.id) %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

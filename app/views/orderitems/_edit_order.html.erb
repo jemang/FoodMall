@@ -7,7 +7,7 @@
   <%= f.input :status, as: :hidden, :input_html => {:value => "pre-order"} %>
   <%= f.input :item_id, as: :hidden %>
   <%= f.input :user_id, as: :hidden %>
-  <p align="right"><%= f.button :submit, "Edit Order", class: "btn btn-success" %> | | <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+  <p align="right"><%= f.button :submit, "Edit Order", class: "btn btn-success" %> | | <%= link_to 'Back', url_for(:back), class: "btn btn-warning" %></p>
 <% end %>
 
 

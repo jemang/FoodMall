@@ -2,36 +2,71 @@
 
 <h2>All Order Items</h2><br>
 
+<%= form_tag('/edit_cust_order', method: :post) %>
 <table class="table">
   <thead>
     <tr class="info">
+      <th></th>
+      <th><%= sort_link @search, :item_name, "Item" %></th>
       <th>Quantity</th>
-      <th>Note</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th>Item</th>
-      <th>User</th>
+      <th><%= sort_link @search, :customer_username, "Customer" %></th>
+      <th>Runner ID</th>
+      <th>Chef ID</th>
+      <th><%= sort_link @search, :status, "Status" %></th>
+      <th><%= sort_link @search, :dtime, "Date" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
+
     <% @orderitems.each do |orderitem| %>
+      <% if orderitem.user_id.to_s == @display.to_s %>
       <tr>
+        <td><%= check_box_tag "orderitem_ids[]", orderitem.id %></td>
+        <td><%= orderitem.item.name %></td>
         <td><%= orderitem.quantity %></td>
-        <td><%= orderitem.note %></td>
-        <td><%= orderitem.total %></td>
+        <td><%= orderitem.user.username %></td>
+        <td><%= orderitem.runner_id %></td>
+        <td><%= orderitem.chef_id %></td>
         <td><%= orderitem.status %></td>
-        <td><%= orderitem.item %></td>
-        <td><%= orderitem.user %></td>
+        <td><%= orderitem.dtime %></td>
         <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
         <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
         <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
       </tr>
+      <% end %>
+
+      <% if orderitem.chef_id.to_s == @display.to_s %>
+      <tr>
+        <td><%= orderitem.item.name %></td>
+        <td><%= orderitem.quantity %></td>
+        <td><%= orderitem.total %></td>
+        <td><%= orderitem.user.username %></td>
+        <td><%= orderitem.status %></td>
+        <td><%= orderitem.dtime %></td>
+        <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
+        <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
+        <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
+      </tr>
+      <% end %>
+
+      <% if orderitem.runner_id.to_s == @display.to_s %>
+      <tr>
+        <td><%= orderitem.item.name %></td>
+        <td><%= orderitem.quantity %></td>
+        <td><%= orderitem.total %></td>
+        <td><%= orderitem.user.username %></td>
+        <td><%= orderitem.status %></td>
+        <td><%= orderitem.dtime %></td>
+        <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
+        <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
+        <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
+      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<p align="right"><%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+<p align="right"><%= submit_tag "Confirm Order", class: "btn btn-info" %> | <%= link_to 'Back', '/view_orderitem', class: "btn btn-warning" %></p>

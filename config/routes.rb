@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   post '/edit_multiple' => 'orderitems#edit_multiple'
   put '/update_multiple' => 'orderitems#update_multiple'
+  get '/view_orderitem' => 'orderitems#view_orderitem'
+  post '/edit_cust_order' => 'orderitems#edit_cust_order'
+  put '/update_cust_order' => 'orderitems#update_cust_order'
 
   put '/update_stask' => 'items#update_stask'
   get '/my_task' => 'items#my_task'

@@ -2,7 +2,7 @@
 	<ul id="sidebar" class="nav nav-stacked affix">
 		<li><%= link_to 'Manage User', '/' %></li>
 		<li><%= link_to 'Products', items_path %></li>
-		<li><%= link_to 'Order Items', orderitems_path %></li>
+		<li><%= link_to 'Order Items', '/view_orderitem' %></li>
 		<li><%= link_to 'New Worker', new_user_path %></li>	
 	</ul>
 <% elsif current_user.role.eql?('runner') || current_user.role.eql?('chef') %>

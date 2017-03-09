@@ -5,7 +5,21 @@ class OrderitemsController < ApplicationController
   # GET /orderitems
   # GET /orderitems.json
   def index
-    @orderitems = Orderitem.all
+    @display = params[:dd]
+    @search = Orderitem.ransack(params[:q])
+    @search.sorts = 'dtime desc' if @search.sorts.empty?
+    @orderitems = @search.result
+    @users = User.all
+
+    @users.each do |orderitem|
+      @sum = orderitem.id
+    end
+
+    @aa = Orderitem.where(:user_id => '4').count
+  end
+
+  def view_orderitem
+    @users = User.all
   end
 
   # GET /orderitems/1
@@ -31,7 +45,7 @@ class OrderitemsController < ApplicationController
 
     respond_to do |format|
       if @orderitem.save
-        format.html { redirect_to '/customer', notice: 'Orderitem was successfully created.' }
+        format.html { redirect_to '/', notice: 'Orderitem was successfully created.' }
         format.json { render :show, status: :created, location: @orderitem }
       else
         format.html { render :new }
@@ -45,7 +59,7 @@ class OrderitemsController < ApplicationController
   def update
     respond_to do |format|
       if @orderitem.update(orderitem_params)
-        format.html { redirect_to '/customer', notice: 'Orderitem was successfully updated.' }
+        format.html { redirect_to '/', notice: 'Orderitem was successfully updated.' }
         format.json { render :show, status: :ok, location: @orderitem }
       else
         format.html { render :edit }
@@ -59,9 +73,29 @@ class OrderitemsController < ApplicationController
   def destroy
     @orderitem.destroy
     respond_to do |format|
-      format.html { redirect_to '/customer', notice: 'Orderitem was successfully canceled.' }
+      format.html { redirect_to :back, notice: 'Orderitem was successfully canceled.' }
       format.json { head :no_content }
     end
+  end
+
+  def edit_cust_order
+    @orderitems = Orderitem.find(params[:orderitem_ids])
+    @users = User.where(:role => "runner")
+    @uname = User.select("username").first
+  end
+
+  def update_cust_order
+    @orderitems = Orderitem.find(params[:orderitem_ids])
+    @orderitems.each do |orderitem|
+      if orderitem.status.eql?('ordered') || orderitem.status.eql?('processing')
+          orderitem.update_attribute(:status, 'processing')
+          orderitem.update(cust_order_params)
+      else
+          orderitem.update(cust_order_params)
+      end
+    end
+    flash[:notice] = "Order Updated!!"
+    redirect_to '/view_orderitem'
   end
 
   def edit_multiple
@@ -79,7 +113,7 @@ class OrderitemsController < ApplicationController
       orderitem.update(multi_params)
     end
     flash[:notice] = "Order Send!!"
-    redirect_to '/customer'
+    redirect_to '/'
   end
 
   private
@@ -95,6 +129,10 @@ class OrderitemsController < ApplicationController
 
     def multi_params
       params.require(:orderitem).permit(:status, :dtime, :totalprice)
+    end
+
+    def cust_order_params
+      params.require(:orderitem).permit(:runner_id, :chef_id)
     end
 
 end
