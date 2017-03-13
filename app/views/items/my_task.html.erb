@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 <h2>My Task</h2><br>
 
 <!-- chef page  -->
@@ -8,14 +8,13 @@
   <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
   <table class="table">
     <thead>
-      <tr class="info">
+      <tr class="danger">
         <th> </th>
-        <th>Items</th>
+        <th><%= sort_link @search, :item_name, "Items" %></th>
         <th>Quantity</th>
         <th>Delivery Time</th>
         <th>Note</th>
         <th>Status</th>
-        <th>Action</th>
       </tr>
     </thead>
 
@@ -29,14 +28,13 @@
           <td><%= order.dtime %></td>
           <td><%= order.note %></td>
           <td><%= order.status %></td>
-          <td><%= link_to 'Cancel' %></td>
         </tr>
         <% end %>
       <% end %>
     </tbody>
   </table>
   <br>
-  <p align="right"><%= f.submit "Complete", class: 'btn btn-primary' %> | <%= link_to 'Back', '/', class: 'btn btn-warning' %></p>
+  <p align="right"><%= f.submit "Complete", class: 'btn btn-primary' %></p>
   <% end %>
 <% end %>
 
@@ -49,14 +47,14 @@
   <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
   <table class="table">
     <thead>
-      <tr class="success">
+      <tr class="danger">
         <th> </th>
+        <th><%= sort_link @search, :customer_username, "Customer" %></th>
         <th>Items</th>
         <th>Quantity</th>
         <th>Delivery Time</th>
         <th>Note</th>
         <th>Status</th>
-        <th>Action</th>
       </tr>
     </thead>
 
@@ -66,17 +64,17 @@
         <tr>
       	  <td><%= check_box_tag "orderitem_ids[]", order.id %></td>
        	  <td><%= link_to order.user.username, user_path(order.user, dd: 'detail') %></td>
+          <td><%= order.item.name %></td>
           <td><%= order.quantity %></td>
           <td><%= order.dtime %></td>
-          <td><%= order.item.name %></td>
+          <td><%= order.note %></td>
           <td><%= order.status %></td>
-          <td><%= link_to 'Cancel' %></td>
         </tr>
         <% end %>
       <% end %>
     </tbody>
   </table>
   <br>
-  <p align="right"><%= f.submit "Complete", class: 'btn btn-primary' %> | <%= link_to 'Back', '/', class: 'btn btn-warning' %></p>
+  <p align="right"><%= f.submit "Complete", class: 'btn btn-primary' %></p>
   <% end %>
 <% end %>

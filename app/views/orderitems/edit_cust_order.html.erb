@@ -14,10 +14,10 @@
 
   <%= f.error_notification %>
   <% if @stat.eql?('ordered') || @stat.eql?('processing') %>
-  	<%= f.input :runner_id, label: "Runner", collection: User.where(:role => "runner").ids %>
-  	<%= f.input :chef_id, label: "Chef", collection: User.where(:role => "chef").ids %>
+  	<%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id, :include_blank => false %>
+  	<%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id, :include_blank => false %>
   <% else %>
-  	<%= f.input :runner_id, label: "Runner", collection: User.where(:role => "runner").ids %>
+  	<%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id, :include_blank => false %>
   <% end %>
   <p align="right"><%= f.button :submit, "Make Order", class: "btn btn-success" %> | <%= link_to 'Back', :back, class: 'btn btn-warning' %></p>
 <% end %>

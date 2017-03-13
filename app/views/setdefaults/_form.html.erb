@@ -1,0 +1,15 @@
+<br>
+<%= simple_form_for @setdefault, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id, as: :hidden, :input_html => {:value => @cust.id} %>
+    <%= f.input :ss, label: "Customer", :input_html => {:value => @cust.username}, disabled: true %>
+  	<%= f.input :chef, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id, :include_blank => false %>
+  	<%= f.input :runner, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id, :include_blank => false %>
+  </div>
+
+  <div class="form-actions">
+    <p align="right"><%= f.button :submit, "Set Default", class: "btn btn-success" %> | <%= link_to 'Back', :back, class: 'btn btn-warning' %></p>
+  </div>
+<% end %>

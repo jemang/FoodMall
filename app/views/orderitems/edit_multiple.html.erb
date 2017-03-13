@@ -5,7 +5,7 @@
 		<% for orderitem in @orderitems %>
 		<li>
 			<%= hidden_field_tag "orderitem_ids[]", orderitem.id %>
-			<%= orderitem.item.name %>
+			<%= orderitem.item.name %> x <%= orderitem.quantity %><br>
 		</li>
 		<% end %>
 	</ul>
@@ -14,6 +14,9 @@
   <%= f.error_notification %>
   <%= f.input :totalprice, label: "Total Price", disabled: true, :input_html => { :value => @sum } %>
   <%= f.input :dtime, label: "Delivery Time", as: :time %>
-  <%= f.input :status, as: :hidden, :input_html => {:value => "ordered"} %>
+  <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>
   <p align="right"><%= f.button :submit, "Make Order", class: "btn btn-success" %> | <%= link_to 'Back', '/customer', class: 'btn btn-warning' %></p>
 <% end %>
+
+<% @chef %>
+<% @runner %>

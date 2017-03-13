@@ -1,8 +1,7 @@
 <h2>Editing User</h2><br>
 
-<% if @match.eql?('edit') %>
-	<%= render 'cedit', user: @user %>
-<% end %>
 <% if @match.eql?('change') %>
 	<%= render 'change_password', user: @user %>
+<% else %>
+	<%= render 'cedit', user: @user %>
 <% end %>

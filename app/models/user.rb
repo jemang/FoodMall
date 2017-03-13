@@ -3,7 +3,9 @@ class User < ApplicationRecord
 	has_secure_password
 
 	has_many :orderitems
-	validates :fullname, :username, :email, :address, :phone, :password, :role, :presence => true
+	has_one :set_default
+
+	validates :fullname, :username, :email, :address, :phone, :role, :presence => true
 	validates :email, :username, :uniqueness => true
 	validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create}
 	validates :password, confirmation: :true

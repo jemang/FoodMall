@@ -42,6 +42,21 @@
     <%= @user.role %>
   </p>
 
+  <% if current_user.role.eql?('admin') %>
+    <% if @user.role == "customer" %>
+      <% if @find %>
+        <p>
+          <strong>Default Chef:</strong>
+          <%= @users.find(@setchef).username %>
+        </p>
+        <p>
+          <strong>Default Runner:</strong>
+          <%= @users.find(@setrun).username %>
+        </p>
+      <% end -%>
+    <% end -%>
+  <% end -%>
+
   <p>
     <strong>Phone:</strong>
     <%= @user.phone %>
@@ -54,6 +69,15 @@
 
   </br>
   <%= link_to 'Edit', edit_user_path(@user, yy: 'edit'), class: "btn btn-primary" %> |
+  <% if current_user.role.eql?('admin') %>
+    <% if @user.role == "customer" %>
+      <% if @find %>
+        <%= link_to 'Update Default', edit_setdefault_path(@setid, cust_id: @user.id), class: "btn btn-info" %> |
+      <% else %>
+        <%= link_to 'Set Default', new_setdefault_path(cust_id: @user.id), class: "btn btn-danger" %> |
+      <% end -%>
+    <% end -%>
+  <% end -%>
   <%= link_to 'Back', '/', class: "btn btn-warning" %>
 
 <% end %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Chef:</strong>
+  <%= @setdefault.chef %>
+</p>
+
+<p>
+  <strong>Runner:</strong>
+  <%= @setdefault.runner %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @setdefault.user %>
+</p>
+
+<%= link_to 'Edit', edit_setdefault_path(@setdefault) %> |
+<%= link_to 'Back', setdefaults_path %>

@@ -5,7 +5,7 @@
   <%= f.input :username %>
   <%= f.input :email %>
   <% if current_user.role.eql?('admin') %>
-      <%= f.input :role, collection: [ "runner", "chef", "customer", "admin"], selected: f.object.role %>
+      <%= f.input :role, collection: [ "runner", "chef", "customer", "admin"], :include_blank => false %>
   <% end %>
   <%= f.input :phone, as: :numeric %>
   <%= f.input :address %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  resources :setdefaults
   resources :orderitems 
   resources :items
   resources :users
@@ -8,7 +10,6 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  get 'pages/home'
 
   get '/signup' => 'users#new'
   get '/customer' => 'users#customer'
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
 
   put '/update_stask' => 'items#update_stask'
   get '/my_task' => 'items#my_task'
+  get '/cust_order' => 'items#cust_order'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

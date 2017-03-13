@@ -12,10 +12,22 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @match = params[:dd]
+    @setdefault = Setdefault.all
+    @users = User.all
+    @setdefault.each do |f|
+      if f.user_id == @user.id
+        @find = f.user_id
+        @setid = f.id
+        @setrun = f.runner
+        @setchef = f.chef
+      end
+    end
   end
 
   def admin
-    @users = User.all
+    @search = User.ransack(params[:q])
+    @search.sorts = 'created_at desc' if @search.sorts.empty?
+    @users = @search.result(distinct: true)
   end
 
   def customer

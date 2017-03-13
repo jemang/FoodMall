@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308033715) do
+ActiveRecord::Schema.define(version: 20170311145527) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -35,6 +35,24 @@ ActiveRecord::Schema.define(version: 20170308033715) do
     t.integer  "chef_id"
     t.index ["item_id"], name: "index_orderitems_on_item_id"
     t.index ["user_id"], name: "index_orderitems_on_user_id"
+  end
+
+  create_table "set_defaults", force: :cascade do |t|
+    t.integer  "chef"
+    t.integer  "runner"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_set_defaults_on_user_id"
+  end
+
+  create_table "setdefaults", force: :cascade do |t|
+    t.integer  "chef"
+    t.integer  "runner"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_setdefaults_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

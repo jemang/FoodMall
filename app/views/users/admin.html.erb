@@ -1,15 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Customers</h2><br>
+<h2>CUSTOMERS</h2><br>
 
 <table class="table">
   <thead>
     <tr class="info">
-      <th>Fullname</th>
-      <th>Username</th>
+      <th><%= sort_link @search, :username, "Username" %></th>
       <th>Email</th>
       <th>Phone</th>
-      <th>Role</th>
+      <th><%= sort_link @search, :created_at, "Register Time" %></th>
       <th>Address</th>
       <th colspan="3"></th>
     </tr>
@@ -19,11 +18,10 @@
     <% @users.each do |user| %>
       <% if user.role == "customer" %>
       <tr>
-        <td><%= user.fullname %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
-        <td><%= user.role %></td>
+        <td><%= time_ago_in_words(user.created_at) %></td>
         <td><%= user.address %></td>
         <td><%= link_to '', user, class: 'glyphicon glyphicon-eye-open' %></td>
         <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
@@ -36,16 +34,15 @@
 
 <br>
 
-<h2>Chef</h2><br>
+<h2>CHEF</h2><br>
 
 <table class="table">
   <thead>
     <tr class="info">
-      <th>Fullname</th>
-      <th>Username</th>
+      <th><%= sort_link @search, :username, "Username" %></th>
       <th>Email</th>
       <th>Phone</th>
-      <th>Role</th>
+      <th><%= sort_link @search, :created_at, "Register Time" %></th>
       <th>Address</th>
       <th colspan="3"></th>
     </tr>
@@ -55,11 +52,10 @@
     <% @users.each do |user| %>
       <% if user.role == "chef" %>
       <tr>
-        <td><%= user.fullname %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
-        <td><%= user.role %></td>
+        <td><%= time_ago_in_words(user.created_at) %></td>
         <td><%= user.address %></td>
         <td><%= link_to '', user, class: 'glyphicon glyphicon-eye-open' %></td>
         <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
@@ -72,16 +68,15 @@
 
 <br>
 
-<h2>Runner</h2><br>
+<h2>RUNNER</h2><br>
 
 <table class="table">
   <thead>
     <tr class="info">
-      <th>Fullname</th>
-      <th>Username</th>
+      <th><%= sort_link @search, :username, "Username" %></th>
       <th>Email</th>
       <th>Phone</th>
-      <th>Role</th>
+      <th><%= sort_link @search, :created_at, "Register Time" %></th>
       <th>Address</th>
       <th colspan="3"></th>
     </tr>
@@ -91,11 +86,10 @@
     <% @users.each do |user| %>
       <% if user.role == "runner" %>
       <tr>
-        <td><%= user.fullname %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
-        <td><%= user.role %></td>
+        <td><%= time_ago_in_words(user.created_at) %></td>
         <td><%= user.address %></td>
         <td><%= link_to '', user, class: 'glyphicon glyphicon-eye-open' %></td>
         <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
@@ -105,5 +99,3 @@
     <% end %>
   </tbody>
 </table>
-<br>
-

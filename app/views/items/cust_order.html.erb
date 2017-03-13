@@ -1,0 +1,34 @@
+<h2>My Orders Status</h2>
+<br>
+
+<table class="table">
+  <thead>
+    <tr class="info">
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Customer</th>
+      <th>Status</th>
+      <th>Delivery Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @orderitems.each do |orderitem| %>
+      <% if current_user.id == orderitem.user_id && orderitem.status != "complete" && orderitem.status != "pre-order" %>
+      <tr>
+        <td><%= orderitem.item.name %></td>
+        <td><%= orderitem.quantity %></td>
+        <td><%= orderitem.total %></td>
+        <td><%= orderitem.user.username %></td>
+        <td><%= orderitem.status %></td>
+        <td><%= orderitem.dtime %></td>
+      </tr>      
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<p align="right"><%= link_to 'Back', '/', class: "btn btn-warning" %></p>

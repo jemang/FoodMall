@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  chef: 1
+  runner: 1
+  user: one
+
+two:
+  chef: 1
+  runner: 1
+  user: two

@@ -1,35 +1,3 @@
-<p id="notice"><%= notice %></p>
 
-<h2>Order Request</h2><br>
 
-<%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
-<table class="table">
-  <thead>
-    <tr class="info">
-      <th> </th>
-      <th>Items</th>
-      <th>Quantity</th>
-      <th>Delivery Time</th>
-      <th>Note</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orderitems.each do |order| %>
-      <% if order.status.eql?('ordered') %> 
-      <tr>
-      	<td><%= check_box_tag "orderitem_ids[]", order.id %></td>
-        <td><%= order.item.name %></td>
-        <td><%= order.quantity %></td>
-        <td><%= order.dtime %></td>
-        <td><%= order.note %></td>
-        <td><%= order.status %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-<br>
-<p align="right"><%= f.submit "Add to Task", class: 'btn btn-primary' %> | <%= link_to 'My Task', '/my_task', class: 'btn btn-info' %></p>
-<% end %>
+<% controller.redirect_to '/my_task' %>

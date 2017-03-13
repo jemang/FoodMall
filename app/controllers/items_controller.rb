@@ -64,20 +64,23 @@ class ItemsController < ApplicationController
 
   def my_task
     @items = Item.all
-    @orderitems = Orderitem.all
+    @search = Orderitem.ransack(params[:q])
+    @search.sorts = 'dtime asc' if @search.sorts.empty?
+    @orderitems = @search.result
+  end
+
+  def cust_order
+    @search = Orderitem.ransack(params[:q])
+    @search.sorts = 'item_name asc' if @search.sorts.empty?
+    @orderitems = @search.result
+    
   end
 
   def update_stask
     @orderitems = Orderitem.find(params[:orderitem_ids])
     @orderitems.each do |orderitem|
-      if orderitem.status.eql?('ordered')
-          orderitem.update_attribute(:status, 'processing')
-          orderitem.update_attribute(:chef_id, current_user.id)
-      elsif orderitem.status.eql?('processing')
-          orderitem.update_attribute(:status, 'ready')
-      elsif orderitem.status.eql?('ready')
+      if orderitem.status.eql?('processing')
           orderitem.update_attribute(:status, 'delivering')
-          orderitem.update_attribute(:runner_id, current_user.id)
       elsif orderitem.status.eql?('delivering')
           orderitem.update_attribute(:status, 'complete')
       end 

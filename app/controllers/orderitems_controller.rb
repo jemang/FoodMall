@@ -19,7 +19,9 @@ class OrderitemsController < ApplicationController
   end
 
   def view_orderitem
-    @users = User.all
+    @search = User.ransack(params[:q])
+    @search.sorts = 'username asc' if @search.sorts.empty?
+    @users = @search.result
   end
 
   # GET /orderitems/1
@@ -31,6 +33,16 @@ class OrderitemsController < ApplicationController
   def new
     @item = Item.find(params[:item_id])
     @orderitem = Orderitem.new
+    @setdefault = Setdefault.all
+    @setdefault.each do |set|
+      if set.user == current_user
+        @chef = set.chef
+        @runner = set.runner
+      else
+        @chef = nil
+        @runner = nil
+      end
+    end
   end
 
   # GET /orderitems/1/edit
@@ -80,8 +92,7 @@ class OrderitemsController < ApplicationController
 
   def edit_cust_order
     @orderitems = Orderitem.find(params[:orderitem_ids])
-    @users = User.where(:role => "runner")
-    @uname = User.select("username").first
+    @users = User.all
   end
 
   def update_cust_order
@@ -100,6 +111,8 @@ class OrderitemsController < ApplicationController
 
   def edit_multiple
     @orderitems = Orderitem.find(params[:orderitem_ids])
+    @setdefault = Setdefault.all
+    
     @sum = 0
     @orderitems.each do |orderitem|
       @sum = orderitem.total.to_i + @sum
@@ -124,7 +137,7 @@ class OrderitemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orderitem_params
-      params.require(:orderitem).permit(:quantity, :note, :total, :status, :item_id, :user_id)
+      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id)
     end
 
     def multi_params
