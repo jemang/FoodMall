@@ -1,56 +1,13 @@
-<p id="notice"><%= notice %></p>
 
-<h2>Record for <%= @users.find(@display.to_i).username %></h2><br>
-
-<% if @users.find(@display.to_i).role == "customer" %>
-<center><h4>Active Order</h4></center>
-<%= form_tag('/edit_cust_order', method: :post) %>
-<table class="table">
-  <thead>
-    <tr class="danger">
-      <th></th>
-      <th><%= sort_link @search, :item_name, "Item" %></th>
-      <th>Quantity</th>
-      <th><%= sort_link @search, :customer_username, "Customer" %></th>
-      <th>Runner</th>
-      <th>Chef</th>
-      <th><%= sort_link @search, :status, "Status" %></th>
-      <th><%= sort_link @search, :dtime, "Date" %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <% @orderitems.each do |orderitem| %>
-      <% if orderitem.user_id.to_s == @display.to_s && orderitem.status != "pre-order" && orderitem.status != "complete" %>
-      <tr>
-        <td><%= check_box_tag "orderitem_ids[]", orderitem.id %></td>
-        <td><%= orderitem.item.name %></td>
-        <td><%= orderitem.quantity %></td>
-        <td><%= orderitem.user.username %></td>
-        <% unless orderitem.runner_id.nil? %>
-          <td><%= @users.find(orderitem.runner_id).username %></td>
-          <td><%= @users.find(orderitem.chef_id).username %></td>
-        <% else %>
-          <td><%= orderitem.runner_id %></td>
-          <td><%= orderitem.chef_id %></td>
-        <% end -%>
-        <td><%= orderitem.status %></td>
-        <td><%= orderitem.dtime %></td>
-        <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
-        <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
-        <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-<p align="right"><%= submit_tag "Set Runner & chef", class: "btn btn-info" %></p>
-
-<% end -%>
+<br><center>
+<%= search_form_for @search do |f| %>
+  <%= f.label :dtime_se_gteq, " From " %>
+  <%= f.date_field :dtime_gteq %>
+  <%= f.label :dtime_lteq, " Until " %>
+  <%= f.date_field :dtime_lteq %>
+  <%= f.submit %>
+<% end %>
+</center><br>
 
 <br><center><h4>All Order Items </h4></center>
 <table class="table">
@@ -58,9 +15,9 @@
     <tr class="info">
       <th><%= sort_link @search, :item_name, "Item" %></th>
       <th>Quantity</th>
-      <th><%= sort_link @search, :customer_username, "Customer" %></th>
-      <th>Runner</th>
-      <th>Chef</th>
+      <th><%= sort_link @search, :user_username, "Customer" %></th>
+      <th><%= sort_link @search, :runner_id, "Runner" %></th>
+      <th><%= sort_link @search, :chef_id, "Chef" %></th>
       <th><%= sort_link @search, :status, "Status" %></th>
       <th><%= sort_link @search, :dtime, "Date" %></th>
       <th colspan="3"></th>
@@ -70,7 +27,7 @@
   <tbody>
 
     <% @orderitems.each do |orderitem| %>
-      <% if orderitem.user_id.to_s == @display.to_s && orderitem.status == "complete" %>
+      <% if orderitem.status != "pre-order" %>
         <tr>
           <td><%= orderitem.item.name %></td>
           <td><%= orderitem.quantity %></td>
@@ -88,23 +45,8 @@
           <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
         </tr>
       <% end %>
-
-      <% if orderitem.chef_id.to_s == @display.to_s || orderitem.runner_id.to_s == @display.to_s %>
-      <tr>
-        <td><%= orderitem.item.name %></td>
-        <td><%= orderitem.quantity %></td>
-        <td><%= orderitem.user.username %></td>
-        <td><%= @users.find(orderitem.runner_id).username %></td>
-        <td><%= @users.find(orderitem.chef_id).username %></td>
-        <td><%= orderitem.status %></td>
-        <td><%= orderitem.dtime %></td>
-        <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
-        <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
-      </tr>
-      <% end %>
     <% end %>
-  </tbody>
+ </tbody>
 </table>
+<%= will_paginate @orderitems %>
 
-<br>
-<p align="right"><%= link_to 'Back', '/view_orderitem', class: "btn btn-warning" %></p>

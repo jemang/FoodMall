@@ -7,11 +7,42 @@
 
 body {
 	padding-top:65px;
+	padding-bottom: 40px;
 }
 
 .navbar-fixed-top {
 	position: fixed;
-	background-color: #333;
+	background-color: #009688;
+}
+
+.affix > li > a {
+    color: #f1f4f7;
+    text-decoration: none;
+}
+
+.affix > li > a:hover {
+    color: #1A232B;
+    text-decoration: none;
+}
+
+.navbar-brand {
+    color: #f1f4f7;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    color: #1A232B;
+    text-decoration: none;
+}
+
+.navbar-right > li > a {
+    color: #f1f4f7;
+    text-decoration: none;
+}
+
+.navbar-right > li > a:hover {
+    color: #1A232B;
+    text-decoration: none;
 }
 
 .content {
@@ -20,16 +51,87 @@ body {
 
 .table {
 	border-radius: 5px;
-	width: 90%;
+	width: 95%;
 	margin: 0px auto;
 	float: none;
 }
 
-#sidebar {
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  padding-left: 0px;
-  padding-right: 0px;
-  transition: all 0.5s ease;
+#sidebar{
+
+        position: fixed;
+        top: 51px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #004D40;
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+    }
+
+/* Custom Colored Panels */
+
+.huge {
+    font-size: 40px;
+}
+
+.panel-primary > a {
+	color: #3E55F5;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green > a {
+    color: #5cb85c;
+}
+
+.panel-green > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red > a {
+    color: #d9534f;
+}
+
+.panel-red > a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow > a {
+    color: #f0ad4e;
+}
+
+.panel-yellow > a:hover {
+    color: #df8a13;
 }

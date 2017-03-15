@@ -1,101 +1,112 @@
 <p id="notice"><%= notice %></p>
 
-<h2>CUSTOMERS</h2><br>
+<div id="page-wrapper">
+  <div class="container-fluid">
+      <!-- Page Heading -->
+      <div class="row">
+          <div class="col-lg-12">
+              <ol class="breadcrumb">
+                  <li class="active">
+                      <i class="fa fa-dashboard"></i> Dashboard
+                  </li>
+              </ol>
+          </div>
+      </div>
+      <!-- /.row -->
 
-<table class="table">
-  <thead>
-    <tr class="info">
-      <th><%= sort_link @search, :username, "Username" %></th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th><%= sort_link @search, :created_at, "Register Time" %></th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="row">
+          <div class="col-lg-3 col-md-6">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-comments fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div class="huge"><%= @cust %></div>
+                              <div>Total Customers!</div>
+                          </div>
+                      </div>
+                  </div>
+                  <a href="#">
+                      <div class="panel-footer">
+                          <span class="pull-left">View Details</span>
+                          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                          <div class="clearfix"></div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+              <div class="panel panel-green">
+                  <div class="panel-heading">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-tasks fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div class="huge"><%= @orderitems %></div>
+                              <div>Complete Orders!</div>
+                          </div>
+                      </div>
+                  </div>
+                  <a href="#">
+                      <div class="panel-footer">
+                          <span class="pull-left">View Details</span>
+                          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                          <div class="clearfix"></div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+              <div class="panel panel-yellow">
+                  <div class="panel-heading">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-shopping-cart fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div class="huge">10</div>
+                              <div>In Progress Orders!</div>
+                          </div>
+                      </div>
+                  </div>
+                  <a href="#">
+                      <div class="panel-footer">
+                          <span class="pull-left">View Details</span>
+                          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                          <div class="clearfix"></div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+              <div class="panel panel-red">
+                  <div class="panel-heading">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-support fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div class="huge"><%= @items %></div>
+                              <div>Total Products!</div>
+                          </div>
+                      </div>
+                  </div>
+                  <a href="#">
+                      <div class="panel-footer">
+                          <span class="pull-left">View Details</span>
+                          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                          <div class="clearfix"></div>
+                      </div>
+                  </a>
+              </div>
+          </div>
+      </div>
+      <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
 
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "customer" %>
-      <tr>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.phone %></td>
-        <td><%= time_ago_in_words(user.created_at) %></td>
-        <td><%= user.address %></td>
-        <td><%= link_to '', user, class: 'glyphicon glyphicon-eye-open' %></td>
-        <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
-        <td><%= link_to '', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
-
-<h2>CHEF</h2><br>
-
-<table class="table">
-  <thead>
-    <tr class="info">
-      <th><%= sort_link @search, :username, "Username" %></th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th><%= sort_link @search, :created_at, "Register Time" %></th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "chef" %>
-      <tr>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.phone %></td>
-        <td><%= time_ago_in_words(user.created_at) %></td>
-        <td><%= user.address %></td>
-        <td><%= link_to '', user, class: 'glyphicon glyphicon-eye-open' %></td>
-        <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
-        <td><%= link_to '', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<h2>RUNNER</h2><br>
-
-<table class="table">
-  <thead>
-    <tr class="info">
-      <th><%= sort_link @search, :username, "Username" %></th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th><%= sort_link @search, :created_at, "Register Time" %></th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "runner" %>
-      <tr>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.phone %></td>
-        <td><%= time_ago_in_words(user.created_at) %></td>
-        <td><%= user.address %></td>
-        <td><%= link_to '', user, class: 'glyphicon glyphicon-eye-open' %></td>
-        <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
-        <td><%= link_to '', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>

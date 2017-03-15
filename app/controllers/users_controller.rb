@@ -24,10 +24,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def all_user
+    @search = User.ransack(params[:q])
+    @search.sorts = 'created_at desc' if @search.sorts.empty?
+    @users = @search.result.paginate(:per_page => 30, :page => params[:page])
+  end 
+
   def admin
     @search = User.ransack(params[:q])
     @search.sorts = 'created_at desc' if @search.sorts.empty?
-    @users = @search.result(distinct: true)
+    @users = @search.result.paginate(:per_page => 30, :page => params[:page])
+    @items = Item.count
+    @orderitems = Orderitem.where(status: "complete").count
+    @cust = User.where(role: "customer").count
+  
   end
 
   def customer

@@ -7,8 +7,6 @@ class Orderitem < ApplicationRecord
 
     #validates :quantity, :dtime, :presence => true
 
-   
-
 private
 	def finalize
     	self[:total] = item.price * quantity

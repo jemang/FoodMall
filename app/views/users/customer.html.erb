@@ -5,6 +5,7 @@
 <table class="table">
   <thead>
     <tr class="info">
+      <th></th>
       <th><%= sort_link @search, :name, "Name" %></th>
       <th><%= sort_link @search, :price, "Price" %></th>
       <th>Note</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
+        <td><%= image_tag item.photo.url(:thumb) %></td>
         <td><%= item.name %></td>
         <td>RM : <%= item.price %></td>
         <td><%= item.note %></td>

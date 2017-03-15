@@ -5,23 +5,34 @@ class OrderitemsController < ApplicationController
   # GET /orderitems
   # GET /orderitems.json
   def index
-    @display = params[:dd]
+    params[:q] ||= {}
+    if params[:q][:dtime_lteq].present?
+        params[:q][:dtime_lteq] = params[:q][:dtime_lteq].to_date.end_of_day
+    end
     @search = Orderitem.ransack(params[:q])
     @search.sorts = 'dtime desc' if @search.sorts.empty?
-    @orderitems = @search.result
+    @orderitems = @search.result.paginate(:per_page => 30, :page => params[:page])
     @users = User.all
-
-    @users.each do |orderitem|
-      @sum = orderitem.id
-    end
-
-    @aa = Orderitem.where(:user_id => '4').count
   end
 
   def view_orderitem
     @search = User.ransack(params[:q])
     @search.sorts = 'username asc' if @search.sorts.empty?
     @users = @search.result
+  end
+
+  def admin_order
+    @orderitem = Orderitem.new
+    @users = User.all
+  end
+
+  def selected_user
+    @display = params[:dd]
+
+    @search = Orderitem.ransack(params[:q])
+    @search.sorts = 'dtime desc' if @search.sorts.empty?
+    @orderitems = @search.result.paginate(:per_page => 30, :page => params[:page])
+    @users = User.all
   end
 
   # GET /orderitems/1
@@ -54,6 +65,7 @@ class OrderitemsController < ApplicationController
   # POST /orderitems.json
   def create
     @orderitem = Orderitem.new(orderitem_params)
+    @orderitem = Orderitem.new(order_params)
 
     respond_to do |format|
       if @orderitem.save
@@ -138,6 +150,10 @@ class OrderitemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def orderitem_params
       params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id)
+    end
+
+    def order_params
+      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id, :dtime)
     end
 
     def multi_params

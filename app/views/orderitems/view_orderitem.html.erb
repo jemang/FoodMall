@@ -1,4 +1,4 @@
-<h2>All Order Items</h2><br>
+<h2>Order Items</h2><br>
 
 <table class="table">
   <thead>
@@ -12,7 +12,7 @@
     <% @users.each do |usr| %>
       <% if usr.role.eql?('customer') %>
       <tr>
-        <td><%= link_to usr.username, orderitems_path(:dd => usr.id) %></td>
+        <td><%= link_to usr.username, selected_user_path(:dd => usr.id) %></td>
       </tr>
       <% end %>
     <% end %>
@@ -33,7 +33,7 @@
     <% @users.each do |usr| %>
       <% if usr.role.eql?('chef') %>
       <tr>
-        <td><%= link_to usr.username, orderitems_path(:dd => usr.id) %></td>
+        <td><%= link_to usr.username, selected_user_path(:dd => usr.id) %></td>
       </tr>
       <% end %>
     <% end %>
@@ -54,7 +54,7 @@
     <% @users.each do |usr| %>
       <% if usr.role.eql?('runner') %>
       <tr>
-        <td><%= link_to usr.username, orderitems_path(:dd => usr.id) %></td>
+        <td><%= link_to usr.username, selected_user_path(:dd => usr.id) %></td>
       </tr>
       <% end %>
     <% end %>

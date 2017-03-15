@@ -16,12 +16,15 @@ Rails.application.routes.draw do
   get '/admin' => 'users#admin'
   get '/runner' => 'users#runner'
   get '/chef' => 'users#chef'
+  get '/all_user' => 'users#all_user'
 
   post '/edit_multiple' => 'orderitems#edit_multiple'
   put '/update_multiple' => 'orderitems#update_multiple'
   get '/view_orderitem' => 'orderitems#view_orderitem'
   post '/edit_cust_order' => 'orderitems#edit_cust_order'
   put '/update_cust_order' => 'orderitems#update_cust_order'
+  get '/selected_user' => 'orderitems#selected_user'
+  get '/admin_order' => 'orderitems#admin_order'
 
   put '/update_stask' => 'items#update_stask'
   get '/my_task' => 'items#my_task'

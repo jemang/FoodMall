@@ -1,0 +1,15 @@
+
+<%= simple_form_for @orderitem do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id, :include_blank => true, required: true %>
+  <%= f.association :item, :label_method => :name, :value_method => :id, :include_blank => true, required: true %>
+  <%= f.input :quantity, required: true %>
+  <%= f.input :dtime, label: "Delivery Time ", as: :time %>
+  <%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id, :include_blank => true, required: true %>
+  <%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id, :include_blank => true, required: true %>
+  <%= f.input :note %>
+  <%= f.input :total, as: :hidden %>
+  <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>
+  
+  <p align="right"><%= f.button :submit, "Order", class: "btn btn-success" %> | | <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+<% end %>
