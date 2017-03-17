@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Customer name</strong>
+  <span style="padding-left:46px;"><strong>: </strong><%= @template.user.username %></span>
+</p>
+
+<p>
+  <strong>Item</strong>
+  <span style="padding-left:123px;"><strong>: </strong><%= @template.item.name %></span>
+</p>
+
+<p>
+  <strong>Quantity</strong>
+  <span style="padding-left:95px;"><strong>: </strong><%= @template.quantity %></span>
+</p>
+
+<p>
+  <strong>Total (RM)</strong>
+  <span style="padding-left:84px;"><strong>: </strong><%= @template.total %></span>
+</p>
+
+<p>
+  <strong>Schedule Day</strong>
+  <span style="padding-left:60px;"><strong>: </strong><%= @template.day %></span>
+</p>
+
+<p>
+  <strong>Delivery Time</strong>
+  <span style="padding-left:60px;"><strong>: </strong><%= @template.dtime.strftime("%I:%M %p") %></span>
+</p>
+
+<p>
+  <strong>Chef Name</strong>
+  <span style="padding-left:78px;"><strong>: </strong><%= @users.find(@template.chef_id).username %></span>
+</p>
+
+<p>
+  <strong>Runner Name</strong>
+  <span style="padding-left:60px;"><strong>: </strong><%= @users.find(@template.runner_id).username %></span>
+</p>
+
+<p>
+  <strong>Status</strong>
+  <span style="padding-left:108px;"><strong>: </strong><%= @template.status %></span>
+</p>
+
+<p>
+  <strong>Note</strong>
+  <span style="padding-left:120px;"><strong>: </strong><%= @template.note %></span>
+</p>
+
+<br>
+
+<%= link_to 'Edit', edit_template_path(@template), class: "btn btn-info" %> |
+<%= link_to 'Delete', @template, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> | 
+<%= link_to 'Back', '/template', class: "btn btn-warning" %>
+
+

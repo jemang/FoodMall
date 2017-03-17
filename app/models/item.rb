@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
 
 	has_many :orderitems
+	has_many :templates
 	has_many :users, through: :orderitems
 	
 	validates :name, :price, :presence => true

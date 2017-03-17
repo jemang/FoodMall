@@ -1,0 +1,20 @@
+<%= simple_form_for @template do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :item %>
+    <%= f.input :quantity  %>
+    <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id, required: :true %>
+    <%= f.input :day, collection: ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"] %>
+    <%= f.input :dtime, as: :time %>
+    <%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id %>
+    <%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id %>
+    <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>
+    <%= f.input :total, as: :hidden %>
+    <%= f.input :note %> 
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-success" %> | <%= link_to 'Back', '/template', class: "btn btn-warning" %>
+  </div>
+<% end %>

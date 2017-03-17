@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  day: MyString
+  dtime: 2017-03-17 10:35:12
+  total: 1.5
+  note: MyText
+  runner_id: 1
+  chef_id: 1
+  user: one
+  item: one
+
+two:
+  quantity: 1
+  day: MyString
+  dtime: 2017-03-17 10:35:12
+  total: 1.5
+  note: MyText
+  runner_id: 1
+  chef_id: 1
+  user: two
+  item: two

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :templates
   resources :setdefaults
   resources :orderitems 
   resources :items
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
   put '/update_stask' => 'items#update_stask'
   get '/my_task' => 'items#my_task'
   get '/cust_order' => 'items#cust_order'
+
+  get '/template' => 'templates#template'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

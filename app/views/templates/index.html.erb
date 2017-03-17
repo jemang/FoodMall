@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p><%= link_to "Template", '/template' %></p>
+
+<h1>Templates</h1>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>Day</th>
+      <th>Dtime</th>
+      <th>Total</th>
+      <th>Note</th>
+      <th>Runner</th>
+      <th>Chef</th>
+      <th>User</th>
+      <th>Item</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @templates.each do |template| %>
+      <tr>
+        <td><%= template.quantity %></td>
+        <td><%= template.day %></td>
+        <td><%= template.dtime %></td>
+        <td><%= template.total %></td>
+        <td><%= template.note %></td>
+        <td><%= template.runner_id %></td>
+        <td><%= template.chef_id %></td>
+        <td><%= template.user.username %></td>
+        <td><%= template.item.name %></td>
+        <td><%= template.item.price %></td>
+        <td><%= template.status %></td>
+        <td><%= link_to 'Show', template %></td>
+        <td><%= link_to 'Edit', edit_template_path(template) %></td>
+        <td><%= link_to 'Destroy', template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Template', new_template_path %>
