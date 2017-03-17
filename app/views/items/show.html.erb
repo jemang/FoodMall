@@ -3,19 +3,20 @@
 <p>
   <%= image_tag @item.photo.url(:medium) %>
 </p>
+
 <p>
-  <strong>Name:</strong>
-  <%= @item.name %>
+  <strong>Name</strong>
+  <span style="padding-left:63px;"><strong>: </strong><%= @item.name %></span>
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @item.price %>
+  <strong>Price</strong>
+  <span style="padding-left:66px;"><strong>: </strong><%= @item.price %></span>
 </p>
 
 <p>
-  <strong>Note:</strong>
-  <%= @item.note %>
+  <strong>Note</strong>
+  <span style="padding-left:68px;"><strong>: </strong><%= @item.note %></span>
 </p>
 
 </br>

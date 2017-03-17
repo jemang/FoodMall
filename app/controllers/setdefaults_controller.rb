@@ -32,7 +32,8 @@ class SetdefaultsController < ApplicationController
 
     respond_to do |format|
       if @setdefault.save
-        format.html { redirect_to '/', notice: 'Setdefault was successfully created.' }
+        flash[:success] = 'Default was successfully created.'
+        format.html { redirect_to '/' }
         format.json { render :show, status: :created, location: @setdefault }
       else
         format.html { render :new }
@@ -46,7 +47,8 @@ class SetdefaultsController < ApplicationController
   def update
     respond_to do |format|
       if @setdefault.update(setdefault_params)
-        format.html { redirect_to '/', notice: 'Setdefault was successfully updated.' }
+        flash[:success] = 'Default was successfully updated.'
+        format.html { redirect_to '/' }
         format.json { render :show, status: :ok, location: @setdefault }
       else
         format.html { render :edit }
@@ -60,7 +62,8 @@ class SetdefaultsController < ApplicationController
   def destroy
     @setdefault.destroy
     respond_to do |format|
-      format.html { redirect_to setdefaults_url, notice: 'Setdefault was successfully destroyed.' }
+      flash[:success] = 'Default was successfully destroyed.'
+      format.html { redirect_to setdefaults_url }
       format.json { head :no_content }
     end
   end

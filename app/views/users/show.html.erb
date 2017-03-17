@@ -3,68 +3,68 @@
 <% if @match.eql?('detail') %>
 
   <p>
-    <strong>Fullname:</strong>
-    <%= @user.fullname %>
+    <strong>Fullname</strong>
+    <span style="padding-left:84px;"><strong>: </strong><%= @user.fullname %></span>
   </p>
 
   <p>
-    <strong>Phone:</strong>
-    <%= @user.phone %>
+    <strong>Phone</strong>
+    <span style="padding-left:102px;"><strong>: </strong><%= @user.phone %></span>
   </p>
 
   <p>
-    <strong>Address:</strong>
-    <%= @user.address %>
+    <strong>Address</strong>
+    <span style="padding-left:88px;"><strong>: </strong><%= @user.address %></span>
   </p>
 
   </br>
   <%= link_to 'Back', '/', class: "btn btn-warning" %>
 
 <% else %>
-  
+
   <p>
-    <strong>Fullname:</strong>
-    <%= @user.fullname %>
+    <strong>Fullname</strong>
+    <span style="padding-left:87px;"><strong>: </strong><%= @user.fullname %></span>
   </p>
 
   <p>
-    <strong>Username:</strong>
-    <%= @user.username %>
+    <strong>Username</strong>
+    <span style="padding-left:80px;"><strong>: </strong><%= @user.username %></span>
   </p>
 
   <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
+    <strong>Email</strong>
+    <span style="padding-left:110px;"><strong>: </strong><%= @user.email %></span>
   </p>
 
   <p>
-    <strong>Role:</strong>
-    <%= @user.role %>
+    <strong>Role</strong>
+    <span style="padding-left:116px;"><strong>: </strong><%= @user.role %></span>
   </p>
 
   <% if current_user.role.eql?('admin') %>
     <% if @user.role == "customer" %>
       <% if @find %>
         <p>
-          <strong>Default Chef:</strong>
-          <%= @users.find(@setchef).username %>
+          <strong>Default Chef</strong>
+          <span style="padding-left:64px;"><strong>: </strong><%= @users.find(@setchef).username %></span>
         </p>
         <p>
-          <strong>Default Runner:</strong>
-          <%= @users.find(@setrun).username %>
+          <strong>Default Runner</strong>
+          <span style="padding-left:46px;"><strong>: </strong><%= @users.find(@setrun).username %></span>
         </p>
       <% end -%>
     <% end -%>
   <% end -%>
 
   <p>
-    <strong>Phone:</strong>
-    <%= @user.phone %>
+    <strong>Phone</strong>
+    <span style="padding-left:102px;"><strong>: </strong><%= @user.phone %></span>
   </p>
 
   <p>
-    <strong>Address:</strong>
-    <%= @user.address %>
+    <strong>Address</strong>
+    <span style="padding-left:88px;"><strong>: </strong><%= @user.address %></span>
   </p>
 
   </br>

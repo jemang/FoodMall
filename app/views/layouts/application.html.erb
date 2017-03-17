@@ -16,7 +16,7 @@
 <!-- Fixed navbar -->
     <div class="navbar navbar-fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="/">Welcome..</a>
+        <a class="navbar-brand" href="/">FoodMall</a>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li class="dropdown">
@@ -62,7 +62,7 @@
       <% else %>
           <% flash.each do |name, msg| -%>
             <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-          <% end -%>
+          <% end %>
 
           <center><%= yield %></center>
       <% end %>

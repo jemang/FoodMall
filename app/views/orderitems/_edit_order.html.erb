@@ -4,7 +4,7 @@
   <%= f.input :quantity %>
   <%= f.input :note %>
   <%= f.input :total, as: :hidden %>
-  <%= f.input :status, as: :hidden, :input_html => {:value => "pre-order"} %>
+  <%= f.input :status, as: :hidden %>
   <%= f.input :item_id, as: :hidden %>
   <%= f.input :user_id, as: :hidden %>
   <p align="right"><%= f.button :submit, "Edit Order", class: "btn btn-success" %> | | <%= link_to 'Back', url_for(:back), class: "btn btn-warning" %></p>

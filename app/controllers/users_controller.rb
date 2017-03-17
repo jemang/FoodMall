@@ -25,22 +25,34 @@ class UsersController < ApplicationController
   end
 
   def all_user
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
     @search = User.ransack(params[:q])
     @search.sorts = 'created_at desc' if @search.sorts.empty?
     @users = @search.result.paginate(:per_page => 30, :page => params[:page])
   end 
 
   def admin
-    @search = User.ransack(params[:q])
-    @search.sorts = 'created_at desc' if @search.sorts.empty?
-    @users = @search.result.paginate(:per_page => 30, :page => params[:page])
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
     @items = Item.count
-    @orderitems = Orderitem.where(status: "complete").count
+    @orderitems = Orderitem.where(:status => "complete").count
     @cust = User.where(role: "customer").count
-  
+    @wait = Orderitem.count - @orderitems
   end
 
   def customer
+    unless current_user.role.eql?('customer')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
     @search = Item.ransack(params[:q])
     @search.sorts = 'name asc' if @search.sorts.empty?
     @items = @search.result(distinct: true)
@@ -53,12 +65,22 @@ class UsersController < ApplicationController
   end
 
   def runner
+    unless current_user.role.eql?('runner')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
     @items = Item.all
     @orderitems = Orderitem.all
     @group = @orderitems.group_by { |t| t.totalprice }
   end
 
   def chef
+    unless current_user.role.eql?('chef')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
     @items = Item.all
     @orderitems = Orderitem.all
   end
@@ -80,9 +102,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        flash[:success] = 'User was successfully created.'
+        format.html { redirect_to new_user_path }
         format.json { render :show, status: :created, location: @user }
       else
+        #flash[:danger] = 'There was a problem create the user.'
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -94,7 +118,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        flash[:success] = 'User was successfully updated.'
+        format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -108,7 +133,8 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      flash[:success] = 'User was successfully destroyed.'
+      format.html { redirect_to users_url }
       format.json { head :no_content }
     end
   end

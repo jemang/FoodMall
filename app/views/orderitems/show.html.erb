@@ -1,33 +1,37 @@
 <p id="notice"><%= notice %></p>
 
+<br>
+
 <p>
-  <strong>Quantity:</strong>
-  <%= @orderitem.quantity %>
+  <strong>User</strong>
+  <span style="padding-left:62px;"><strong>: </strong><%= @orderitem.user.username %></span>
 </p>
 
 <p>
-  <strong>Note:</strong>
-  <%= @orderitem.note %>
+  <strong>Item</strong>
+  <span style="padding-left:63px;"><strong>: </strong><%= @orderitem.item.name %></span>
 </p>
 
 <p>
-  <strong>Total:</strong>
-  <%= @orderitem.total %>
+  <strong>Quantity</strong>
+  <span style="padding-left:35px;"><strong>: </strong><%= @orderitem.quantity %></span>
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @orderitem.status %>
+  <strong>Total</strong>
+  <span style="padding-left:60px;"><strong>: </strong><%= @orderitem.total %></span>
 </p>
 
 <p>
-  <strong>Item:</strong>
-  <%= @orderitem.item %>
+  <strong>Status</strong>
+  <span style="padding-left:50px;"><strong>: </strong><%= @orderitem.status %></span>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @orderitem.user %>
+  <strong>Note</strong>
+  <span style="padding-left:60px;"><strong>: </strong><%= @orderitem.note %></span>
 </p>
+
+<br>
 
 | <%= link_to 'Back', url_for(:back), class: 'btn btn-warning' %> |

@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <% if current_user.role.eql?('admin') %>
   <% controller.redirect_to '/admin' %>
   <% elsif current_user.role.eql?('customer') %>

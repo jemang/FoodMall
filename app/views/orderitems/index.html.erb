@@ -42,6 +42,9 @@
           <td><%= orderitem.status %></td>
           <td><%= orderitem.dtime %></td>
           <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
+          <% if orderitem.status != "complete" %>
+          <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
+          <% end -%>
           <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
         </tr>
       <% end %>

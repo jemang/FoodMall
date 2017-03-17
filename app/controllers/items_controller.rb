@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   def index
     @search = Item.ransack(params[:q])
     @search.sorts = 'name asc' if @search.sorts.empty?
-    @items = @search.result
+    @items = @search.result.paginate(:per_page => 20, :page => params[:page])
   end
 
   # GET /items/1
@@ -31,7 +31,8 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+        flash[:success] = 'Item was successfully created.'
+        format.html { redirect_to @item }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -45,7 +46,8 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        flash[:success] = 'Item was successfully updated.'
+        format.html { redirect_to @item }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -59,7 +61,8 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      flash[:success] = 'Item was successfully destroyed.'
+      format.html { redirect_to items_url }
       format.json { head :no_content }
     end
   end
@@ -87,7 +90,7 @@ class ItemsController < ApplicationController
           orderitem.update_attribute(:status, 'complete')
       end 
     end
-    flash[:notice] = "Success!!"
+    flash[:success] = 'Success!!'
     redirect_to '/'
   end
 

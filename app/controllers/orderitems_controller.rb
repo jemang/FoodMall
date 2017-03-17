@@ -28,7 +28,6 @@ class OrderitemsController < ApplicationController
 
   def selected_user
     @display = params[:dd]
-
     @search = Orderitem.ransack(params[:q])
     @search.sorts = 'dtime desc' if @search.sorts.empty?
     @orderitems = @search.result.paginate(:per_page => 30, :page => params[:page])
@@ -69,7 +68,8 @@ class OrderitemsController < ApplicationController
 
     respond_to do |format|
       if @orderitem.save
-        format.html { redirect_to '/', notice: 'Orderitem was successfully created.' }
+        flash[:success] = 'Orderitem was successfully created.'
+        format.html { redirect_to '/' }
         format.json { render :show, status: :created, location: @orderitem }
       else
         format.html { render :new }
@@ -83,7 +83,8 @@ class OrderitemsController < ApplicationController
   def update
     respond_to do |format|
       if @orderitem.update(orderitem_params)
-        format.html { redirect_to '/', notice: 'Orderitem was successfully updated.' }
+        flash[:success] = 'Orderitem was successfully updated.'
+        format.html { redirect_to '/' }
         format.json { render :show, status: :ok, location: @orderitem }
       else
         format.html { render :edit }
@@ -97,7 +98,8 @@ class OrderitemsController < ApplicationController
   def destroy
     @orderitem.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Orderitem was successfully canceled.' }
+      flash[:success] = 'Orderitem was successfully canceled.'
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
@@ -117,7 +119,7 @@ class OrderitemsController < ApplicationController
           orderitem.update(cust_order_params)
       end
     end
-    flash[:notice] = "Order Updated!!"
+    flash[:success] = 'Order Updated.'
     redirect_to '/view_orderitem'
   end
 
@@ -137,7 +139,7 @@ class OrderitemsController < ApplicationController
     @orderitems.each do |orderitem|
       orderitem.update(multi_params)
     end
-    flash[:notice] = "Order Send!!"
+    flash[:success] = 'Order was successfully send.'
     redirect_to '/'
   end
 

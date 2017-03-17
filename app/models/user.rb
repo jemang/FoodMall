@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	has_secure_password
 
 	has_many :orderitems
+	has_many :items, through: :orderitems
 	has_one :set_default
 
 	validates :fullname, :username, :email, :address, :phone, :role, :presence => true
