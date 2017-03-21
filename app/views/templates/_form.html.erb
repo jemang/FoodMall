@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.association :item %>
     <%= f.input :quantity  %>
-    <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id, required: :true %>
+    <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id %>
     <%= f.input :day, collection: ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"] %>
     <%= f.input :dtime, as: :time %>
     <%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id %>

@@ -1,6 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Product</h2><br>
+<center><h2>Product</h2></center><br>
+
+ <%= search_form_for @search do |f| %>
+  <span style="padding-left:28px;">
+    <%= f.label :name_cont, "Item Name" %>
+    <%= f.text_field :name_cont %>
+    <%= f.submit %>
+  </span> 
+  <span style="padding-left:530px;">
+    <%= link_to 'New Item', new_item_path, class: "btn btn-primary" %>
+  </span>
+ <% end %>
+
+ <br>
 
 <table class="table">
   <thead>
@@ -30,6 +43,3 @@
 <%= will_paginate @items %>
 
 </br>
-
-<p align="right"><%= link_to 'New Item', new_item_path, class: "btn btn-primary" %> | 
-<%= link_to 'Back', users_path, class: "btn btn-warning" %></p>

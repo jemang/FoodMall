@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     end
     @search = Item.ransack(params[:q])
     @search.sorts = 'name asc' if @search.sorts.empty?
-    @items = @search.result(distinct: true)
+    @items = @search.result.paginate(:per_page => 10, :page => params[:page])
     @orderitems = Orderitem.all
     @orderitems.each do |orderitem|
       if current_user == orderitem.user && orderitem.status == 'pre-order'
@@ -134,7 +134,7 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       flash[:success] = 'User was successfully destroyed.'
-      format.html { redirect_to users_url }
+      format.html { redirect_to '/all_user' }
       format.json { head :no_content }
     end
   end

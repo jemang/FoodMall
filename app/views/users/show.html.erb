@@ -77,7 +77,8 @@
         <%= link_to 'Set Default', new_setdefault_path(cust_id: @user.id), class: "btn btn-danger" %> |
       <% end -%>
     <% end -%>
-  <% end -%>
-  <%= link_to 'Back', '/', class: "btn btn-warning" %>
-
+    <%= link_to 'Back', '/all_user', class: "btn btn-warning" %></p>
+  <% else %>
+    <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+  <% end %>
 <% end %>

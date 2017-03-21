@@ -14,9 +14,16 @@ class TemplatesController < ApplicationController
     @users = User.all
   end
 
+  def cron_job
+    @days = params[:day]
+    HardWorker.perform_async(@days)
+    flash[:success] = 'Successfully added to cron job.'
+    redirect_to '/template'
+  end
+
   def template
     unless current_user.role.eql?('admin')
-      flash[:danger] = "You don't have access to that Page!"
+      flash[:danger] = 'You don not have access to that Page!'
       redirect_to '/'
       return
     end
@@ -40,6 +47,7 @@ class TemplatesController < ApplicationController
   # POST /templates
   # POST /templates.json
   def create
+    @users = User.all
     @template = Template.new(template_params)
 
     respond_to do |format|
@@ -57,6 +65,7 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   # PATCH/PUT /templates/1.json
   def update
+    @users = User.all
     respond_to do |format|
       if @template.update(template_params)
         flash[:success] = 'Template was successfully updated.'

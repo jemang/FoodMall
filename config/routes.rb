@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/cron_sidekiq'
+  
   resources :templates
   resources :setdefaults
   resources :orderitems 
@@ -32,6 +35,7 @@ Rails.application.routes.draw do
   get '/cust_order' => 'items#cust_order'
 
   get '/template' => 'templates#template'
+  get '/cron_job' => 'templates#cron_job'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

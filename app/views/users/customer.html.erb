@@ -2,6 +2,19 @@
 
 <h2>Our Product</h2>
 <br>
+
+ <%= search_form_for @search, url: '/customer' do |f| %>
+ <p align="right">
+  <span style="padding-right:30px;">
+    <%= f.label :name_cont, "Item Name" %>
+    <%= f.text_field :name_cont %>
+    <%= f.submit %>
+  </span> 
+ </p>
+ <% end %>
+
+ <br>
+
 <table class="table">
   <thead>
     <tr class="info">
@@ -25,6 +38,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @items %>
 
 <br>
    

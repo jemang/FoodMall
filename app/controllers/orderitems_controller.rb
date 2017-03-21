@@ -10,7 +10,7 @@ class OrderitemsController < ApplicationController
         params[:q][:dtime_lteq] = params[:q][:dtime_lteq].to_date.end_of_day
     end
     @search = Orderitem.ransack(params[:q])
-    @search.sorts = 'dtime desc' if @search.sorts.empty?
+    @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @orderitems = @search.result.paginate(:per_page => 30, :page => params[:page])
     @users = User.all
   end
@@ -29,8 +29,8 @@ class OrderitemsController < ApplicationController
   def selected_user
     @display = params[:dd]
     @search = Orderitem.ransack(params[:q])
-    @search.sorts = 'dtime desc' if @search.sorts.empty?
-    @orderitems = @search.result.paginate(:per_page => 30, :page => params[:page])
+    @search.sorts = 'updated_at desc' if @search.sorts.empty?
+    @orderitems = @search.result.paginate(:per_page => 50, :page => params[:page])
     @users = User.all
   end
 

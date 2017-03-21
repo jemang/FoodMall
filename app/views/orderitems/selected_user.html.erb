@@ -15,7 +15,7 @@
       <th>Runner</th>
       <th>Chef</th>
       <th><%= sort_link @search, :status, "Status" %></th>
-      <th><%= sort_link @search, :dtime, "Date" %></th>
+      <th><%= sort_link @search, :updated_at, "Delivery Time" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -37,7 +37,7 @@
           <td><%= orderitem.chef_id %></td>
         <% end -%>
         <td><%= orderitem.status %></td>
-        <td><%= orderitem.dtime %></td>
+        <td><%= orderitem.updated_at.strftime("%d/%m/%Y") %><%= orderitem.dtime.strftime(" at %I:%M %p") %></td>
         <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
         <td><%= link_to '', edit_orderitem_path(orderitem), class: 'glyphicon glyphicon-pencil' %></td>
         <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
@@ -64,7 +64,7 @@
       <th>Runner</th>
       <th>Chef</th>
       <th><%= sort_link @search, :status, "Status" %></th>
-      <th><%= sort_link @search, :dtime, "Date" %></th>
+      <th><%= sort_link @search, :updated_at, "Delivery Time" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -74,18 +74,40 @@
     <% @orderitems.each do |orderitem| %>
       <% if orderitem.user_id.to_s == @display.to_s && orderitem.status == "complete" %>
         <tr>
-          <td><%= orderitem.item.name %></td>
+          <% unless orderitem.item.nil? %>
+            <td><%= orderitem.item.name %></td>
+          <% else %>
+            <td><%= orderitem.item_id %></td>
+          <% end -%>
+
           <td><%= orderitem.quantity %></td>
-          <td><%= orderitem.user.username %></td>
-          <% unless orderitem.runner_id.nil? %>
-            <td><%= @users.find(orderitem.runner_id).username %></td>
-            <td><%= @users.find(orderitem.chef_id).username %></td>
+
+          <% unless orderitem.user.nil? %>
+            <td><%= orderitem.user.username %></td>
+          <% else %>
+            <td><%= orderitem.user_id %></td>
+          <% end -%>
+
+          <% unless orderitem.runner_id.nil? && orderitem.chef_id.nil? %>
+            <% if @users.exists?(orderitem.runner_id) %>
+                <td><%= @users.find(orderitem.runner_id).username %></td>
+            <% else %>
+                <td><%= orderitem.runner_id %></td>
+            <% end -%>
+
+            <% if @users.exists?(orderitem.chef_id) %>
+                <td><%= @users.find(orderitem.chef_id).username %></td>
+            <% else %>
+                <td><%= orderitem.chef_id %></td>
+            <% end -%>
+
           <% else %>
             <td><%= orderitem.runner_id %></td>
             <td><%= orderitem.chef_id %></td>
           <% end -%>
+
           <td><%= orderitem.status %></td>
-          <td><%= orderitem.dtime %></td>
+          <td><%= orderitem.updated_at.strftime("%d/%m/%Y") %><%= orderitem.dtime.strftime(" at %I:%M %p") %></td>
           <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
           <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
         </tr>
@@ -93,13 +115,40 @@
 
       <% if orderitem.chef_id.to_s == @display.to_s || orderitem.runner_id.to_s == @display.to_s %>
       <tr>
-        <td><%= orderitem.item.name %></td>
-        <td><%= orderitem.quantity %></td>
-        <td><%= orderitem.user.username %></td>
-        <td><%= @users.find(orderitem.runner_id).username %></td>
-        <td><%= @users.find(orderitem.chef_id).username %></td>
-        <td><%= orderitem.status %></td>
-        <td><%= orderitem.dtime %></td>
+          <% unless orderitem.item.nil? %>
+            <td><%= orderitem.item.name %></td>
+          <% else %>
+            <td><%= orderitem.item_id %></td>
+          <% end -%>
+
+          <td><%= orderitem.quantity %></td>
+
+          <% unless orderitem.user.nil? %>
+            <td><%= orderitem.user.username %></td>
+          <% else %>
+            <td><%= orderitem.user_id %></td>
+          <% end -%>
+
+          <% unless orderitem.runner_id.nil? && orderitem.chef_id.nil? %>
+            <% if @users.exists?(orderitem.runner_id) %>
+                <td><%= @users.find(orderitem.runner_id).username %></td>
+            <% else %>
+                <td><%= orderitem.runner_id %></td>
+            <% end -%>
+
+            <% if @users.exists?(orderitem.chef_id) %>
+                <td><%= @users.find(orderitem.chef_id).username %></td>
+            <% else %>
+                <td><%= orderitem.chef_id %></td>
+            <% end -%>
+
+          <% else %>
+            <td><%= orderitem.runner_id %></td>
+            <td><%= orderitem.chef_id %></td>
+          <% end -%>
+
+          <td><%= orderitem.status %></td>
+          <td><%= orderitem.updated_at.strftime("%d/%m/%Y") %><%= orderitem.dtime.strftime(" at %I:%M %p") %></td>
         <td><%= link_to '', orderitem, class: 'glyphicon glyphicon-eye-open' %></td>
         <td><%= link_to '', orderitem, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
       </tr>

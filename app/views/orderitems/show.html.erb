@@ -4,12 +4,20 @@
 
 <p>
   <strong>User</strong>
-  <span style="padding-left:62px;"><strong>: </strong><%= @orderitem.user.username %></span>
+  <% unless @orderitem.user.nil? %>
+    <span style="padding-left:62px;"><strong>: </strong><%= @orderitem.user.username %></span>
+  <% else %>
+    <span style="padding-left:62px;"><strong>: </strong><%= @orderitem.user_id %></span>
+  <% end -%>
 </p>
 
 <p>
   <strong>Item</strong>
-  <span style="padding-left:63px;"><strong>: </strong><%= @orderitem.item.name %></span>
+  <% unless @orderitem.item.nil? %>
+    <span style="padding-left:63px;"><strong>: </strong><%= @orderitem.item.name %></span>
+  <% else %>
+    <span style="padding-left:63px;"><strong>: </strong><%= @orderitem.item_id %></span>
+  <% end -%>
 </p>
 
 <p>

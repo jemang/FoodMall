@@ -1,25 +1,37 @@
 
 <h1 class="title text-center"> Schedule Orders </h1><br>
 
-<td><%= link_to 'Add Template', new_template_path, class: "btn btn-primary" %></td><br><br>
+ <%= search_form_for @search, url: '/template' do |f| %>
+  <p>
+  	<%= f.label :user_username_cont, "Customer Name" %>
+  	<%= f.text_field :user_username_cont %>
+  	<%= f.submit %> <span style="padding-left:490px;"><%= link_to 'Add Template', new_template_path, class: "btn btn-primary" %></span>
+  </p>
+ <% end %>
+
+ <br>
 
 <div class="calendar" data-toggle="calendar">
 	<div class="row">
-		<div  class="col-xs-12 calendar-head" ><strong>Customers</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Sunday</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Monday</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Tuesday</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Wednesday</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Thursday</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Friday</strong></div>
-		<div class="col-xs-12 calendar-head" ><strong>Saturday</strong></div>
+		<div  class="col-xs-12 calendar-head" ><strong><%= sort_link @search, :user_username, "Customers" %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Sunday', cron_job_path(day: 'sunday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Monday', cron_job_path(day: 'monday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Tuesday', cron_job_path(day: 'tuesday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Wednesday', cron_job_path(day: 'wednesday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Thursday', cron_job_path(day: 'thursday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Friday', cron_job_path(day: 'friday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
+		<div class="col-xs-12 calendar-head" ><strong><%= link_to 'Saturday', cron_job_path(day: 'saturday'), data: { confirm: "Are you sure you want to add cron job?" } %></strong></div>
 	</div>
 	<% @cust.each do |cust| %>
 	<div class="row">
 		<div class="col-xs-12 calendar-day">
 			<div class="events">
 				<div class="event">
-					<h3><%= cust.user.username %></h3>
+					<% unless cust.user.nil? %>
+          				<h3><%= cust.user.username %></h3>
+        			<% else %>
+          				<h3><%= cust.user_id %></h3>
+        			<% end -%>
 				</div>
 			</div>
 		</div>
@@ -28,9 +40,15 @@
 			<% if template.user_id == cust.user_id && template.day == "sunday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -41,9 +59,15 @@
 			<% if template.user_id == cust.user_id && template.day == "monday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -54,9 +78,15 @@
 			<% if template.user_id == cust.user_id && template.day == "tuesday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -67,9 +97,15 @@
 			<% if template.user_id == cust.user_id && template.day == "wednesday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -80,9 +116,15 @@
 			<% if template.user_id == cust.user_id && template.day == "thursday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -93,9 +135,15 @@
 			<% if template.user_id == cust.user_id && template.day == "friday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -106,9 +154,15 @@
 			<% if template.user_id == cust.user_id && template.day == "saturday" %>
 				<div class="events">
 					<div class="event">
-						<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+						<% unless template.item.nil? %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-						</h4>
+							</h4>
+        				<% else %>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
+							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							</h4>
+        				<% end -%>
 					</div>
 				</div>
 			<% end %>
@@ -119,4 +173,4 @@
 	<%= will_paginate @cust %>
 </div>
 <br>
-<p class="text-center">..FoodMall..</p>
+<p class="text-center">..FoodMall Template..</p>

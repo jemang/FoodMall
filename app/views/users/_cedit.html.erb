@@ -10,6 +10,11 @@
   <%= f.input :phone, as: :numeric %>
   <%= f.input :address %>
 
-  <p align="right"><%= f.button :submit, "Update", class: "btn btn-success" %> | | <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+  <p align="right"><%= f.button :submit, "Update", class: "btn btn-success" %> | | 
+  <% if current_user.role.eql?("admin") %>
+    <%= link_to 'Back', '/all_user', class: "btn btn-warning" %></p>
+  <% else %>
+    <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+  <% end %>
 <% end %>
 

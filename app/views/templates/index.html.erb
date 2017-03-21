@@ -30,7 +30,11 @@
         <td><%= template.note %></td>
         <td><%= template.runner_id %></td>
         <td><%= template.chef_id %></td>
-        <td><%= template.user.username %></td>
+        <% unless template.user.nil? %>
+          <td><%= template.user.username %></td>
+        <% else %>
+          <td><%= template.user_id %></td>
+        <% end -%>
         <td><%= template.item.name %></td>
         <td><%= template.item.price %></td>
         <td><%= template.status %></td>

@@ -2,12 +2,20 @@
 
 <p>
   <strong>Customer name</strong>
-  <span style="padding-left:46px;"><strong>: </strong><%= @template.user.username %></span>
+  <% unless @template.user.nil? %>
+    <span style="padding-left:46px;"><strong>: </strong><%= @template.user.username %></span>
+  <% else %>
+    <span style="padding-left:46px;"><strong>: </strong><%= @template.user_id %></span>
+  <% end -%>
 </p>
 
 <p>
   <strong>Item</strong>
-  <span style="padding-left:123px;"><strong>: </strong><%= @template.item.name %></span>
+  <% unless @template.item.nil? %>
+    <span style="padding-left:123px;"><strong>: </strong><%= @template.item.name %></span>
+  <% else %>
+    <span style="padding-left:123px;"><strong>: </strong><%= @template.item_id %></span>
+  <% end -%>
 </p>
 
 <p>
@@ -32,12 +40,22 @@
 
 <p>
   <strong>Chef Name</strong>
-  <span style="padding-left:78px;"><strong>: </strong><%= @users.find(@template.chef_id).username %></span>
+  <% if @users.exists?(@template.chef_id) %>
+    <span style="padding-left:78px;"><strong>: </strong><%= @users.find(@template.chef_id).username %></span>
+  <% else %>
+    <span style="padding-left:78px;"><strong>: </strong><%= @template.chef_id %></span>
+  <% end -%>
+  
 </p>
 
 <p>
   <strong>Runner Name</strong>
-  <span style="padding-left:60px;"><strong>: </strong><%= @users.find(@template.runner_id).username %></span>
+  <% if @users.exists?(@template.runner_id) %>
+    <span style="padding-left:60px;"><strong>: </strong><%= @users.find(@template.runner_id).username %></span>
+  <% else %>
+    <span style="padding-left:60px;"><strong>: </strong><%= @template.runner_id %></span>
+  <% end -%>
+  
 </p>
 
 <p>
