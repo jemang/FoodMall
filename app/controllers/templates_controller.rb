@@ -5,6 +5,12 @@ class TemplatesController < ApplicationController
   # GET /templates 
   # GET /templates.json
   def index
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+    
     @templates = Template.all
   end
 

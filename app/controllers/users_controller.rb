@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     @orderitems = Orderitem.where(:status => "complete").count
     @cust = User.where(role: "customer").count
     @wait = Orderitem.count - @orderitems
+
   end
 
   def customer
@@ -92,7 +93,25 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @match = params[:yy]
+    
+  end
+
+  def change_password
+    @user = User.find(params[:id])
+  end
+
+  def update_password
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update(password_params)
+        flash[:success] = 'Password was successfully updated.'
+        format.html { redirect_to @user }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :change_password }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /users
@@ -148,5 +167,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:fullname, :username, :email, :role, :address, :password, :password_confirmation, :phone)
+    end
+
+    def password_params
+      params.require(:user).permit(:password, :password_confirmation)
     end
 end

@@ -15,6 +15,8 @@
   <%= f.input :totalprice, label: "Total Price", disabled: true, :input_html => { :value => @sum } %>
   <%= f.input :dtime, label: "Delivery Time", as: :time %>
   <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>
+  <%= f.input :current_user_id, as: :hidden, :input_html => {:value => current_user.id} %>
+  
   <p align="right"><%= f.button :submit, "Make Order", class: "btn btn-success" %> | <%= link_to 'Back', '/customer', class: 'btn btn-warning' %></p>
 <% end %>
 

@@ -5,10 +5,17 @@ class OrderitemsController < ApplicationController
   # GET /orderitems
   # GET /orderitems.json
   def index
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+
     params[:q] ||= {}
     if params[:q][:dtime_lteq].present?
         params[:q][:dtime_lteq] = params[:q][:dtime_lteq].to_date.end_of_day
     end
+
     @search = Orderitem.ransack(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @orderitems = @search.result.paginate(:per_page => 30, :page => params[:page])
@@ -16,12 +23,24 @@ class OrderitemsController < ApplicationController
   end
 
   def view_orderitem
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+
     @search = User.ransack(params[:q])
     @search.sorts = 'username asc' if @search.sorts.empty?
     @users = @search.result
   end
 
   def admin_order
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+
     @orderitem = Orderitem.new
     @users = User.all
   end
@@ -67,13 +86,28 @@ class OrderitemsController < ApplicationController
     @orderitem = Orderitem.new(order_params)
 
     respond_to do |format|
-      if @orderitem.save
-        flash[:success] = 'Orderitem was successfully created.'
-        format.html { redirect_to '/' }
-        format.json { render :show, status: :created, location: @orderitem }
+      if current_user.role.eql?('admin')
+        if @orderitem.save
+          flash[:success] = 'Orderitem was successfully created.'
+          format.html { redirect_to '/' }
+          format.json { render :show, status: :created, location: @orderitem }
+        else
+          @users = User.all
+          format.html { render :admin_order }
+          format.json { render json: @orderitem.errors, status: :unprocessable_entity }
+        end
+
       else
-        format.html { render :new }
-        format.json { render json: @orderitem.errors, status: :unprocessable_entity }
+
+        if @orderitem.save
+          flash[:success] = 'Orderitem was successfully created.'
+          format.html { redirect_to '/' }
+          format.json { render :show, status: :created, location: @orderitem }
+        else
+          @item = Item.find(@orderitem.item_id)
+          format.html { render :new }
+          format.json { render json: @orderitem.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -151,19 +185,19 @@ class OrderitemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orderitem_params
-      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id)
+      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id, :current_user_id)
     end
 
     def order_params
-      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id, :dtime)
+      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id, :dtime, :current_user_id)
     end
 
     def multi_params
-      params.require(:orderitem).permit(:status, :dtime, :totalprice)
+      params.require(:orderitem).permit(:status, :dtime, :totalprice, :current_user_id)
     end
 
     def cust_order_params
-      params.require(:orderitem).permit(:runner_id, :chef_id)
+      params.require(:orderitem).permit(:runner_id, :chef_id, :current_user_id)
     end
 
 end

@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
     @search = Item.ransack(params[:q])
     @search.sorts = 'name asc' if @search.sorts.empty?
     @items = @search.result.paginate(:per_page => 20, :page => params[:page])

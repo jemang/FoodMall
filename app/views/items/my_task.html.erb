@@ -4,15 +4,31 @@
 <!-- chef page  -->
 
 <% if current_user.role.eql?('chef') %>
+  
+  <script type="text/javascript">
+
+    function checkAll(bx) 
+    {
+      var cbs = document.getElementsByTagName('input');
+      for(var i=0; i < cbs.length; i++) 
+      {
+        if(cbs[i].type == 'checkbox') 
+        {
+          cbs[i].checked = bx.checked;
+        }
+      }
+    }
+
+  </script>
 
   <%= form_for :orderitem, :url => '/update_stask', :html => { :method => :put } do |f| %>
   <table class="table">
     <thead>
       <tr class="danger">
-        <th> </th>
+        <th> <input type="checkbox" onclick="checkAll(this)"> </th>
         <th><%= sort_link @search, :item_name, "Items" %></th>
         <th>Quantity</th>
-        <th>Delivery Time</th>
+        <th><%= sort_link @search, :updated_at, "Delivery Time" %></th>
         <th>Note</th>
         <th>Status</th>
       </tr>
@@ -25,7 +41,7 @@
       	  <td><%= check_box_tag "orderitem_ids[]", order.id %></td>
           <td><%= order.item.name %></td>
           <td><%= order.quantity %></td>
-          <td><%= order.dtime %></td>
+          <td><%= order.updated_at.strftime("%d/%m/%Y") %><%= order.dtime.strftime(" at %I:%M %p") %></td>
           <td><%= order.note %></td>
           <td><%= order.status %></td>
         </tr>
@@ -49,10 +65,10 @@
     <thead>
       <tr class="danger">
         <th> </th>
-        <th><%= sort_link @search, :customer_username, "Customer" %></th>
+        <th><%= sort_link @search, :user_username, "Customer" %></th>
         <th>Items</th>
         <th>Quantity</th>
-        <th>Delivery Time</th>
+        <th><%= sort_link @search, :updated_at, "Delivery Time" %></th>
         <th>Note</th>
         <th>Status</th>
       </tr>
@@ -66,7 +82,7 @@
        	  <td><%= link_to order.user.username, user_path(order.user, dd: 'detail') %></td>
           <td><%= order.item.name %></td>
           <td><%= order.quantity %></td>
-          <td><%= order.dtime %></td>
+          <td><%= order.updated_at.strftime("%d/%m/%Y") %><%= order.dtime.strftime(" at %I:%M %p") %></td>
           <td><%= order.note %></td>
           <td><%= order.status %></td>
         </tr>

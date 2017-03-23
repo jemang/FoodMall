@@ -47,11 +47,19 @@
       <% if @find %>
         <p>
           <strong>Default Chef</strong>
-          <span style="padding-left:64px;"><strong>: </strong><%= @users.find(@setchef).username %></span>
+          <% if @users.exists?(@setchef) %>
+            <span style="padding-left:64px;"><strong>: </strong><%= @users.find(@setchef).username %></span>
+          <% else %>
+            <span style="padding-left:64px;"><strong>: </strong><%= @setchef %></span>
+          <% end -%>
         </p>
         <p>
           <strong>Default Runner</strong>
-          <span style="padding-left:46px;"><strong>: </strong><%= @users.find(@setrun).username %></span>
+          <% if @users.exists?(@setrun) %>
+            <span style="padding-left:46px;"><strong>: </strong><%= @users.find(@setrun).username %></span>
+          <% else %>
+            <span style="padding-left:46px;"><strong>: </strong><%= @setrun %></span>
+          <% end -%>
         </p>
       <% end -%>
     <% end -%>

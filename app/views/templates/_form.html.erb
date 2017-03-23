@@ -6,7 +6,7 @@
     <%= f.input :quantity  %>
     <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id %>
     <%= f.input :day, collection: ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"] %>
-    <%= f.input :dtime, as: :time %>
+    <%= f.input :dtime, label: "Delivery Time", as: :time %>
     <%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id %>
     <%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id %>
     <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get '/runner' => 'users#runner'
   get '/chef' => 'users#chef'
   get '/all_user' => 'users#all_user'
+  get '/change_password' => 'users#change_password'
+  put '/update_password' => 'users#update_password'
 
   post '/edit_multiple' => 'orderitems#edit_multiple'
   put '/update_multiple' => 'orderitems#update_multiple'

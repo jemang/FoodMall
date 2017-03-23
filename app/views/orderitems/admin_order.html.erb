@@ -10,6 +10,7 @@
   <%= f.input :note %>
   <%= f.input :total, as: :hidden %>
   <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>
+  <%= f.input :current_user_id, as: :hidden, :input_html => {:value => current_user.id} %>
   
   <p align="right"><%= f.button :submit, "Order", class: "btn btn-success" %> | | <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
 <% end %>

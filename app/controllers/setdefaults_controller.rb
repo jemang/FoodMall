@@ -4,6 +4,12 @@ class SetdefaultsController < ApplicationController
   # GET /setdefaults
   # GET /setdefaults.json
   def index
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+    
     @setdefaults = Setdefault.all
   end
 

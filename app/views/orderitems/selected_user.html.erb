@@ -1,5 +1,21 @@
 <p id="notice"><%= notice %></p>
 
+<script type="text/javascript">
+
+  function checkAll(bx) 
+  {
+    var cbs = document.getElementsByTagName('input');
+    for(var i=0; i < cbs.length; i++) 
+    {
+      if(cbs[i].type == 'checkbox') 
+      {
+        cbs[i].checked = bx.checked;
+      }
+    }
+  }
+
+</script>
+
 <h2>Record for <%= @users.find(@display.to_i).username %></h2><br>
 
 <% if @users.find(@display.to_i).role == "customer" %>
@@ -8,7 +24,7 @@
 <table class="table">
   <thead>
     <tr class="danger">
-      <th></th>
+      <th><input type="checkbox" onclick="checkAll(this)"></th>
       <th><%= sort_link @search, :item_name, "Item" %></th>
       <th>Quantity</th>
       <th><%= sort_link @search, :customer_username, "Customer" %></th>

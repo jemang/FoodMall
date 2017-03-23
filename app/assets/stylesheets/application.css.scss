@@ -4,9 +4,6 @@
 @import "font-awesome";
 
 
-
-
-
 body {
 	padding-top:65px;
 	padding-bottom: 40px;
@@ -77,6 +74,11 @@ body {
         overflow-x: hidden;
         padding-bottom: 40px;
     }
+
+@media screen and (max-width: 750px)  {
+  #sidebar { display: none; }
+  .content { width: 100%; }
+} 
 
 /* Custom Colored Panels */
 

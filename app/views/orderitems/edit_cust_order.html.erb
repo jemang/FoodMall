@@ -19,5 +19,6 @@
   <% else %>
   	<%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id, :include_blank => false %>
   <% end %>
+    <%= f.input :current_user_id, as: :hidden, :input_html => {:value => current_user.id} %>
   <p align="right"><%= f.button :submit, "Make Order", class: "btn btn-success" %> | <%= link_to 'Back', :back, class: 'btn btn-warning' %></p>
 <% end %>
