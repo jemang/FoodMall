@@ -12,6 +12,7 @@
  <p></p>
 
 <p> ** click the day to make manual cron jobs ** </p>
+
 <div class="calendar" data-toggle="calendar">
 	<div class="row">
 		<div  class="col-xs-12 calendar-head" ><strong><%= sort_link @search, :user_username, "Customers" %></strong></div>
@@ -42,7 +43,7 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
+          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "this text appears when you hover" %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
 							</h4>
         				<% else %>
@@ -63,6 +64,7 @@
 						<% unless template.item.nil? %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+							<%= link_to "link text", '/', :title => "this text appears when you hover" %>
 							</h4>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>

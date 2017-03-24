@@ -27,6 +27,8 @@ class TemplatesController < ApplicationController
     redirect_to '/template'
   end
 
+  
+
   def template
     unless current_user.role.eql?('admin')
       flash[:danger] = 'You don not have access to that Page!'
