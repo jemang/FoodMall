@@ -6,7 +6,7 @@ class HardWorker
   	template.each do |temp|
      order = Orderitem.new
      order.quantity = temp.quantity
-     order.note = "cron job"
+     order.note = temp.note
      order.total = temp.total
      order.status = temp.status
      order.item_id = temp.item_id

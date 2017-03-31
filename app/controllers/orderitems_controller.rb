@@ -12,8 +12,8 @@ class OrderitemsController < ApplicationController
     end
 
     params[:q] ||= {}
-    if params[:q][:dtime_lteq].present?
-        params[:q][:dtime_lteq] = params[:q][:dtime_lteq].to_date.end_of_day
+    if params[:q][:updated_at_lteq].present?
+        params[:q][:updated_at_lteq] = params[:q][:updated_at_lteq].to_date.end_of_day
     end
 
     @search = Orderitem.ransack(params[:q])
@@ -32,6 +32,14 @@ class OrderitemsController < ApplicationController
     @search = User.ransack(params[:q])
     @search.sorts = 'username asc' if @search.sorts.empty?
     @users = @search.result
+    @date = Date.today.strftime("%d/%m/%Y")
+    @orderitems = Orderitem.all
+    @orderitems.each do |d|
+      if d.updated_at.strftime('%d/%m/%Y') == @date
+        @rn = d.runner_id
+        @ch = d.chef_id
+      end
+    end
   end
 
   def admin_order
@@ -50,7 +58,26 @@ class OrderitemsController < ApplicationController
     @search = Orderitem.ransack(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
     @orderitems = @search.result.paginate(:per_page => 50, :page => params[:page])
+    @chef_runner = @search.result.paginate(:per_page => 50, :page => params[:page])
     @users = User.all
+  end
+
+  def print
+    @owner = params[:id]
+    @date = Date.today
+    @orderitems = Orderitem.where(updated_at: @date.midnight..@date.end_of_day)
+    @users = User.all
+    @items = Item.all
+    @usr = Orderitem.select(:user_id).uniq
+
+    if params[:date] != nil
+      @owner = params[:id]
+      @date = Date.parse(params[:date])
+      @orderitems = Orderitem.where(updated_at: @date.midnight..@date.end_of_day)
+      @users = User.all
+      @items = Item.all
+    end
+
   end
 
   # GET /orderitems/1
@@ -185,7 +212,7 @@ class OrderitemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orderitem_params
-      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id, :current_user_id)
+      params.require(:orderitem).permit(:quantity, :note, :total, :status, :runner_id, :chef_id, :item_id, :user_id, :dtime, :current_user_id)
     end
 
     def order_params

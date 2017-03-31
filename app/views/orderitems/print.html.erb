@@ -1,0 +1,61 @@
+
+<h2>Record to Print</h2><br>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class='demo-area'>
+      <button class="clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#fe_text">
+        <b><i class="fa fa-clipboard"></i></b>
+      </button><br>
+
+        <div cols='50' id='fe_text' rows='3'>
+        <div style="text-align:left;">
+      		<h4>Record for <%= @date.strftime("%d/%m/%Y") %> ( <%= @date.strftime("%A") %> )</h4>
+      			<p>Task For : <strong><%= @users.find(@owner).username %></strong></p>
+            <% if @users.find(@owner).role == "runner"%> 
+              <% @orderitems.group_by(&:runner_id).each do |runner, otime| %>
+                <% if runner == @owner.to_i %>
+                  <% otime.group_by(&:time).each do |day,chk| %>
+                    <p>Delivery Time : <strong><%= day %></strong></p>
+                    <% chk.group_by(&:user_id).each do |cust, order| %>
+                      <%= @users.find(cust).username %> : <br>
+                        <% order.group_by(&:item_id).each do |item, ord| %>
+                          # <%= @items.find(item).name %> <br>
+                            <% ord.group_by(&:quantity).each do |q, o| %>
+                              - <%= q %> x <%= o.count %> <br>
+                            <% end -%>
+                        <% end -%>
+                        <br>
+                    <% end %>
+                  <% end -%>
+                <% end -%>
+              <% end -%>
+            <% end -%>
+
+            <% if @users.find(@owner).role == "chef"%> 
+              <% @orderitems.group_by(&:chef_id).each do |chef, otime| %>
+                <% if chef == @owner.to_i %>
+                  <% otime.group_by(&:time).each do |day,chk| %>
+                    <p>Delivery Time : <strong><%= day %></strong></p>
+                    <% chk.group_by(&:runner_id).each do |runner, order| %>
+                      <%= @users.find(runner).username %> : <br>
+                        <% order.group_by(&:item_id).each do |item, ord| %>
+                          # <%= @items.find(item).name %> <br> 
+                            <% ord.group_by(&:quantity).each do |q, o| %>
+                              - <%= q %> x <%= o.count %> <br>
+                            <% end -%>
+                        <% end -%>
+                        <br>
+                    <% end %>
+                  <% end -%>
+                <% end -%>
+              <% end -%>
+            <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<%= link_to 'Back', '/view_orderitem', class: "btn btn-warning" %>

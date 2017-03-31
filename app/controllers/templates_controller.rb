@@ -39,6 +39,7 @@ class TemplatesController < ApplicationController
     @search.sorts = 'user_username asc' if @search.sorts.empty?
     @cust = @search.result.paginate(:per_page => 10, :page => params[:page])
     @templates = Template.all
+    @users = User.all
   end
 
   # GET /templates/new

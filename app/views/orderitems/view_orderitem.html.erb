@@ -25,6 +25,7 @@
   <thead>
     <tr class="info">
       <th>Chef</th>
+      <th><span style="padding-left:610px;">Print</span></th>
     </tr>
   </thead>
 
@@ -34,6 +35,16 @@
       <% if usr.role.eql?('chef') %>
       <tr>
         <td><%= link_to usr.username, selected_user_path(:dd => usr.id) %></td>
+        <td align="right">
+          <%= form_tag print_path, :method => 'get', class:'form-inline' do %>
+            <div>
+              <%= date_field_tag :date, params[:date], required: true, class:'form-control'%>
+              <%= hidden_field_tag :id, usr.id %>
+              <%= submit_tag "Search By Date", :name => nil, class: 'btn btn-info' %> || 
+              <%= link_to "Today Task", print_path(id: usr.id), class: "btn btn-info" %>
+            </div>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     <% end %>
@@ -46,6 +57,7 @@
   <thead>
     <tr class="info">
       <th>Runner</th>
+      <th><span style="padding-left:610px;">Print</span></th>
     </tr>
   </thead>
 
@@ -55,6 +67,16 @@
       <% if usr.role.eql?('runner') %>
       <tr>
         <td><%= link_to usr.username, selected_user_path(:dd => usr.id) %></td>
+        <td align="right">
+          <%= form_tag print_path, :method => 'get', class:'form-inline' do %>
+            <div>
+              <%= date_field_tag :date, params[:date], required: true, class:'form-control'%>
+              <%= hidden_field_tag :id, usr.id %>
+              <%= submit_tag "Search By Date", :name => nil, class: 'btn btn-info' %> || 
+              <%= link_to "Today Task", print_path(id: usr.id), class: "btn btn-info" %>
+            </div>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     <% end %>

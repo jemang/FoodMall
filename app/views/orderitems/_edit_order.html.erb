@@ -1,15 +1,26 @@
 
-<%= simple_form_for orderitem, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for orderitem do |f| %>
   <%= f.error_notification %>
-  <%= f.input :quantity %>
-  <%= f.input :note %>
-  <%= f.input :total, as: :hidden %>
-  <%= f.input :status, as: :hidden %>
-  <%= f.input :item_id, as: :hidden %>
-  <%= f.input :user_id, as: :hidden %>
-  <%= f.input :current_user_id, as: :hidden, :input_html => {:value => current_user.id} %>
+  <% if current_user.role.eql?('admin') %>
+	  <%= f.input :user_id, as: :hidden %>
+	  <%= f.input :item_id, as: :hidden %>
+	  <%= f.input :quantity, required: true %>
+	  <%= f.input :dtime, label: "Delivery Time ", as: :time %>
+	  <%= f.input :chef_id, as: :hidden %>
+	  <%= f.input :runner_id, as: :hidden %>
+	  <%= f.input :note %>
+	  <%= f.input :total, as: :hidden %>
+	  <%= f.input :status, collection: ["processing", "delivering", "complete"], :include_blank => false %>
+	  <%= f.input :current_user_id, as: :hidden, :input_html => {:value => current_user.id} %>
+  <% else %>
+	  <%= f.input :quantity %>
+	  <%= f.input :note %>
+	  <%= f.input :total, as: :hidden %>
+	  <%= f.input :status, as: :hidden %>
+	  <%= f.input :item_id, as: :hidden %>
+	  <%= f.input :user_id, as: :hidden %>
+	  <%= f.input :current_user_id, as: :hidden, :input_html => {:value => current_user.id} %>
+  <% end %>
 
   <p align="right"><%= f.button :submit, "Edit Order", class: "btn btn-success" %> | | <%= link_to 'Back', url_for(:back), class: "btn btn-warning" %></p>
 <% end %>
-
-

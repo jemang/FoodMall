@@ -15,6 +15,7 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'simple_form'
+gem 'clipboard-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'

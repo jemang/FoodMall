@@ -8,7 +8,11 @@ class Orderitem < ApplicationRecord
 
     validates :quantity, :user_id, :item_id, :chef_id, :runner_id, :presence => true, if: "User.find(self.current_user_id).role.eql?('admin')"
 
-    validates :quantity, :presence => true
+
+
+    def time
+    	self.dtime.strftime("%I:%M %p")
+    end
 
 private
 	def finalize

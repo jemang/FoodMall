@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   put '/update_cust_order' => 'orderitems#update_cust_order'
   get '/selected_user' => 'orderitems#selected_user'
   get '/admin_order' => 'orderitems#admin_order'
+  get '/print' => 'orderitems#print'
 
   put '/update_stask' => 'items#update_stask'
   get '/my_task' => 'items#my_task'

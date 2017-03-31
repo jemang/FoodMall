@@ -11,7 +11,7 @@
 
  <p></p>
 
-<p> ** click the day to make manual cron jobs ** </p>
+<p style="font-size:70%;"> ** click the day to make manual cron jobs ** </p>
 
 <div class="calendar" data-toggle="calendar">
 	<div class="row">
@@ -43,9 +43,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "this text appears when you hover" %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
@@ -62,10 +70,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							<%= link_to "link text", '/', :title => "this text appears when you hover" %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
@@ -82,9 +97,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
@@ -101,9 +124,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
@@ -120,9 +151,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
@@ -139,9 +178,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
@@ -158,9 +205,17 @@
 				<div class="events">
 					<div class="event">
 						<% unless template.item.nil? %>
-          					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template) %><br>
-							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
-							</h4>
+							<% if @users.exists?(template.chef_id) && @users.exists?(template.runner_id) %>
+	          					<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{@users.find(template.chef_id).username } #{"\n"} Runner : #{@users.find(template.runner_id).username} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% else %>
+								<h4>
+									<i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item.name, template_path(template), :title => "Chef : #{template.chef_id} #{"\n"} Runner : #{template.runner_id} #{"\n"} Time : #{template.dtime.strftime("%I:%M %p")}" %><br>
+									<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
+								</h4>
+							<% end %>
         				<% else %>
           					<h4><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;<%= link_to template.item_id, template_path(template) %><br>
 							<i class="fa fa-cubes" aria-hidden="true"></i>&nbsp;<%= template.quantity %>
