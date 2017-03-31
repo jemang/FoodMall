@@ -16,7 +16,11 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
+# redis
 /dump.rdb
+/db/redis/foodmall.rdb
+
 
 # Ignore Byebug command history file.
 .byebug_history

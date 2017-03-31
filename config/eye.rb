@@ -36,4 +36,13 @@ Eye.application 'FoodMall' do
       # ensure the memory is below 300Mb the last 3 times checked
       check :memory, every: 20.seconds, below: 300.megabytes, times: 3
   end
+
+ # sidekiq process, daemonized with eye
+   process :sidekiq do |p|
+    pid_file "tmp/pids/sidekiq.pid"
+    start_command "bundle exec sidekiq"
+    stop_signals [:USR1, 0, :TERM, 10.seconds, :KILL]
+    daemonize true
+  end
+
 end
