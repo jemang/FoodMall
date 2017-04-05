@@ -14,15 +14,16 @@
 //= require bootstrap-sprockets
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //= require clipboard
+//= require bootstrap
 //= require turbolinks
 //= require_tree .
 
 
-$(document).ready(function(){  
+// $(document).ready(function(){  
   
-  var clipboard = new Clipboard('.clipboard-btn');
-  console.log(clipboard);
+//   var clipboard = new Clipboard('.clipboard-btn');
+//   console.log(clipboard);
 	
-});
+// });
+
