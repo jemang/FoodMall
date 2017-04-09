@@ -55,19 +55,20 @@ class TemplatesController < ApplicationController
 
   # POST /templates
   # POST /templates.json
+
   def create
     @users = User.all
-    @template = Template.new(template_params)
-
-    respond_to do |format|
-      if @template.save
-        flash[:success] = 'Template was successfully created.'
-        format.html { redirect_to '/template' }
-        format.json { render :show, status: :created, location: @template }
-      else
-        format.html { render :new }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
-      end
+    @day = params[:ids]
+    if @day.nil? == false
+       @day.each do |template|
+         @template = Template.new(create_multi_params)
+         @template.day = template
+         @template.save
+       end
+       redirect_to '/template'
+    else
+       @template = Template.new(create_multi_params)
+       render :new
     end
   end
 
@@ -107,5 +108,8 @@ class TemplatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
       params.require(:template).permit(:quantity, :day, :dtime, :total, :note, :status, :runner_id, :chef_id, :user_id, :item_id)
+    end
+    def create_multi_params
+      params.require(:template).permit(:quantity, :dtime, :total, :note, :status, :runner_id, :chef_id, :user_id, :item_id)
     end
 end
