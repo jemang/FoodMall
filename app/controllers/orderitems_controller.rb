@@ -56,9 +56,12 @@ class OrderitemsController < ApplicationController
   def selected_user
     @display = params[:dd]
     @search = Orderitem.ransack(params[:q])
+    @complete = Orderitem.where(status: "complete").ransack(params[:q])
     @search.sorts = 'updated_at desc' if @search.sorts.empty?
-    @orderitems = @search.result.paginate(:per_page => 50, :page => params[:page])
-    @chef_runner = @search.result.paginate(:per_page => 50, :page => params[:page])
+    @complete.sorts = 'updated_at desc' if @complete.sorts.empty?
+    @orderitems = @complete.result.paginate(:per_page => 30, :page => params[:page])
+    @chef_runner = @search.result.paginate(:per_page => 30, :page => params[:page])
+    @pending = @search.result
     @users = User.all
   end
 
@@ -166,8 +169,13 @@ class OrderitemsController < ApplicationController
   end
 
   def edit_cust_order
-    @orderitems = Orderitem.find(params[:orderitem_ids])
-    @users = User.all
+    @order_id = params[:orderitem_ids]
+    unless @order_id.nil?
+      @orderitems = Orderitem.find(@order_id)
+      @users = User.all
+    else
+      redirect_to '/view_orderitem'
+    end
   end
 
   def update_cust_order
@@ -185,12 +193,17 @@ class OrderitemsController < ApplicationController
   end
 
   def edit_multiple
-    @orderitems = Orderitem.find(params[:orderitem_ids])
-    @setdefault = Setdefault.all
-    
-    @sum = 0
-    @orderitems.each do |orderitem|
-      @sum = orderitem.total.to_i + @sum
+    @order_id = params[:orderitem_ids]
+    if @order_id.nil? == false
+      @orderitems = Orderitem.find(@order_id)
+      @setdefault = Setdefault.all
+      
+      @sum = 0
+      @orderitems.each do |orderitem|
+        @sum = orderitem.total.to_i + @sum
+      end
+    else
+      redirect_to '/'
     end
     
   end

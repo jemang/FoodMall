@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :item %>
+    <%= f.association :item, input_html: {class: "select2_to"} %>
     <%= f.input :quantity  %>
-    <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id %>
+    <%= f.input :user_id, :collection => @users.where(:role => "customer"), :label_method => :username, :value_method => :id, input_html: {class: "select2_to"} %>
     <%= f.label "Delivery Day" %>
     <p>
         <%= check_box_tag "ids[]", 'sunday' %> -> Sunday<br>
@@ -15,9 +15,10 @@
         <%= check_box_tag "ids[]", 'friday' %> -> Friday<br>
         <%= check_box_tag "ids[]", 'saturday' %> -> Saturday<br>
     </p>
+
     <%= f.input :dtime, label: "Delivery Time", as: :time %>
-    <%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id %>
-    <%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id %>
+    <%= f.input :chef_id, :collection => @users.where(:role => "chef"), :label_method => :username, :value_method => :id, input_html: {class: "select2_to"} %>
+    <%= f.input :runner_id, :collection => @users.where(:role => "runner"), :label_method => :username, :value_method => :id, input_html: {class: "select2_to"} %>
     <%= f.input :status, as: :hidden, :input_html => {:value => "processing"} %>
     <%= f.input :total, as: :hidden %>
     <%= f.input :note %> 

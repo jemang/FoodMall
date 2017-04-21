@@ -87,16 +87,21 @@ class ItemsController < ApplicationController
   end
 
   def update_stask
-    @orderitems = Orderitem.find(params[:orderitem_ids])
-    @orderitems.each do |orderitem|
-      if orderitem.status.eql?('processing')
-          orderitem.update_attribute(:status, 'delivering')
-      elsif orderitem.status.eql?('delivering')
-          orderitem.update_attribute(:status, 'complete')
-      end 
+    @order_id = params[:orderitem_ids]
+    if @order_id.nil? == false
+      @orderitems = Orderitem.find(@order_id)
+      @orderitems.each do |orderitem|
+        if orderitem.status.eql?('processing')
+            orderitem.update_attribute(:status, 'delivering')
+        elsif orderitem.status.eql?('delivering')
+            orderitem.update_attribute(:status, 'complete')
+        end 
+      end
+      flash[:success] = 'Success!!'
+      redirect_to '/'
+    else
+      redirect_to '/'
     end
-    flash[:success] = 'Success!!'
-    redirect_to '/'
   end
 
   private

@@ -14,6 +14,8 @@
 //= require bootstrap-sprockets
 //= require jquery
 //= require jquery_ujs
+//= require select2
+//= require select2_simple_form
 //= require clipboard
 //= require bootstrap
 //= require turbolinks
@@ -26,4 +28,8 @@
 //   console.log(clipboard);
 	
 // });
+
+$( document ).on('turbolinks:load', function() {
+  $('.select2_to').select2();
+})
 

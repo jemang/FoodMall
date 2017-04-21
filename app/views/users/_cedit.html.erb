@@ -12,7 +12,15 @@
 
   <p align="right"><%= f.button :submit, "Update", class: "btn btn-success" %> | | 
   <% if current_user.role.eql?("admin") %>
-    <%= link_to 'Back', '/all_user', class: "btn btn-warning" %></p>
+    <% if user.role == "customer" %>
+      <%= link_to 'Back', '/all_customer', class: "btn btn-warning" %></p>
+    <% elsif user.role == "chef" %>
+      <%= link_to 'Back', '/all_chef', class: "btn btn-warning" %></p>
+    <% elsif user.role == "runner" %>
+      <%= link_to 'Back', '/all_runner', class: "btn btn-warning" %></p>
+    <% else %>
+      <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
+    <% end -%>
   <% else %>
     <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
   <% end %>

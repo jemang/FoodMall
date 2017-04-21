@@ -25,6 +25,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'sidekiq'
 gem 'sidekiq-client-cli'
 gem 'whenever', :require => false
+gem 'select2-rails'
+gem 'select2_simple_form', github: 'lndl/select2_simple_form', tag: '0.7.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

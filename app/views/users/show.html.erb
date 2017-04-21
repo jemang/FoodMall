@@ -84,8 +84,14 @@
       <% else %>
         <%= link_to 'Set Default', new_setdefault_path(cust_id: @user.id), class: "btn btn-danger" %> |
       <% end -%>
+      <%= link_to 'Back', '/all_customer', class: "btn btn-warning" %></p>
+    <% elsif @user.role == "chef" %>
+      <%= link_to 'Back', '/all_chef', class: "btn btn-warning" %></p>
+    <% elsif @user.role == "runner" %>
+      <%= link_to 'Back', '/all_runner', class: "btn btn-warning" %></p>
+    <% else %>
+      <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
     <% end -%>
-    <%= link_to 'Back', '/all_user', class: "btn btn-warning" %></p>
   <% else %>
     <%= link_to 'Back', '/', class: "btn btn-warning" %></p>
   <% end %>

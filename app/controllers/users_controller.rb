@@ -24,15 +24,37 @@ class UsersController < ApplicationController
     end
   end
 
-  def all_user
+  def all_customer
     unless current_user.role.eql?('admin')
       flash[:danger] = "You don't have access to that Page!"
       redirect_to '/'
       return
     end
-    @search = User.ransack(params[:q])
+    @search = User.where(role: 'customer').ransack(params[:q])
     @search.sorts = 'created_at desc' if @search.sorts.empty?
-    @users = @search.result.paginate(:per_page => 30, :page => params[:page])
+    @users = @search.result.paginate(:per_page => 15, :page => params[:page])
+  end
+
+  def all_chef
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+    @search = User.where(role: 'chef').ransack(params[:q])
+    @search.sorts = 'created_at desc' if @search.sorts.empty?
+    @chefs = @search.result.paginate(:per_page => 15, :page => params[:page])
+  end
+
+  def all_runner
+    unless current_user.role.eql?('admin')
+      flash[:danger] = "You don't have access to that Page!"
+      redirect_to '/'
+      return
+    end
+    @search = User.where(role: 'runner').ransack(params[:q])
+    @search.sorts = 'created_at desc' if @search.sorts.empty?
+    @runners = @search.result.paginate(:per_page => 15, :page => params[:page])
   end 
 
   def admin
@@ -150,11 +172,23 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    role = @user.role
     @user.destroy
     respond_to do |format|
       flash[:success] = 'User was successfully destroyed.'
-      format.html { redirect_to '/all_user' }
-      format.json { head :no_content }
+      if role == "customer"
+        format.html { redirect_to '/all_customer' }
+        format.json { head :no_content }
+      elsif role == "chef"
+        format.html { redirect_to '/all_chef' }
+        format.json { head :no_content }
+      elsif role == "runner"
+        format.html { redirect_to '/all_runner' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to '/' }
+        format.json { head :no_content }
+      end
     end
   end
 

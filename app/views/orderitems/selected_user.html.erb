@@ -34,11 +34,11 @@
       <th><%= sort_link @search, :updated_at, "Delivery Time" %></th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+  </thead> 
 
   <tbody>
 
-    <% @orderitems.each do |orderitem| %>
+    <% @pending.each do |orderitem| %>
       <% if orderitem.user_id.to_s == @display.to_s && orderitem.status != "pre-order" && orderitem.status != "complete" %>
       <tr>
         <td><%= check_box_tag "orderitem_ids[]", orderitem.id %></td>

@@ -1,20 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-
-
-<br>
-
-
-
-<br>
-
-<%= render 'all_customer' %>
-
-<%= render 'all_chef' %>
-
-<%= render 'all_runner' %>
-
-<h2>Admin</h2><br>
+<h2>RUNNER</h2><br>
 
 <table class="table">
   <thead>
@@ -29,8 +13,7 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <% if user.role == "admin" %>
+    <% @runners.each do |user| %>
       <tr>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
@@ -41,9 +24,8 @@
         <td><%= link_to '', edit_user_path(user, yy: 'edit'), class: 'glyphicon glyphicon-pencil' %></td>
         <td><%= link_to '', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
 <br>
-<%= will_paginate @users %>
+<%= will_paginate @runners %>
