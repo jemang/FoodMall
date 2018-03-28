@@ -10,7 +10,7 @@ end
 gem 'rails', '~> 5.0.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 0.20.0'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'autoprefixer-rails'
