@@ -27,3 +27,4 @@
 
 # Ignore all uploaded data
 /public/system/items/photos/ 
+/public/assets/*

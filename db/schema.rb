@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170317025207) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 20170317025207) do
     t.datetime "dtime"
     t.integer  "runner_id"
     t.integer  "chef_id"
-    t.index ["item_id"], name: "index_orderitems_on_item_id"
-    t.index ["user_id"], name: "index_orderitems_on_user_id"
+    t.index ["item_id"], name: "index_orderitems_on_item_id", using: :btree
+    t.index ["user_id"], name: "index_orderitems_on_user_id", using: :btree
   end
 
   create_table "set_defaults", force: :cascade do |t|
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170317025207) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_set_defaults_on_user_id"
+    t.index ["user_id"], name: "index_set_defaults_on_user_id", using: :btree
   end
 
   create_table "setdefaults", force: :cascade do |t|
@@ -56,7 +59,7 @@ ActiveRecord::Schema.define(version: 20170317025207) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_setdefaults_on_user_id"
+    t.index ["user_id"], name: "index_setdefaults_on_user_id", using: :btree
   end
 
   create_table "templates", force: :cascade do |t|
@@ -72,8 +75,8 @@ ActiveRecord::Schema.define(version: 20170317025207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "status"
-    t.index ["item_id"], name: "index_templates_on_item_id"
-    t.index ["user_id"], name: "index_templates_on_user_id"
+    t.index ["item_id"], name: "index_templates_on_item_id", using: :btree
+    t.index ["user_id"], name: "index_templates_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
